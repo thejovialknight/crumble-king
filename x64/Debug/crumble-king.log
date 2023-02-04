@@ -1,0 +1,53 @@
+﻿  animation.cpp
+C:\Users\thejo\source\crumble-king\src\animation.cpp(53,13): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\thejo\source\crumble-king\src\animation.cpp(54,14): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  collision.cpp
+C:\Users\thejo\source\crumble-king\src\collision.cpp(47,87): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  enemy.cpp
+  food.cpp
+C:\Users\thejo\source\crumble-king\src\food.cpp(45,58): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\thejo\source\crumble-king\src\food.cpp(59,76): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\thejo\source\crumble-king\src\food.cpp(108,76): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  game.cpp
+  high_scores.cpp
+C:\Users\thejo\source\crumble-king\src\high_scores.cpp(20,5): error C3861: 'SaveFileText': identifier not found
+  king.cpp
+  level.cpp
+C:\Users\thejo\source\crumble-king\src\level.cpp(13,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\thejo\source\crumble-king\src\level.cpp(44,95): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  main.cpp
+  menu.cpp
+C:\Users\thejo\source\crumble-king\src\menu.cpp(10,75): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  platform.cpp
+C:\Users\thejo\source\crumble-king\src\platform.cpp(17,25): warning C4806: '==': unsafe operation: no value of type 'bool' promoted to type 'int' can equal the given constant
+C:\Users\thejo\source\crumble-king\src\platform.cpp(31,34): warning C4244: 'argument': conversion from 'double' to 'Uint8', possible loss of data
+C:\Users\thejo\source\crumble-king\src\platform.cpp(30,34): warning C4244: 'argument': conversion from 'double' to 'Uint8', possible loss of data
+C:\Users\thejo\source\crumble-king\src\platform.cpp(29,34): warning C4244: 'argument': conversion from 'double' to 'Uint8', possible loss of data
+C:\Users\thejo\source\crumble-king\src\platform.cpp(37,24): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\thejo\source\crumble-king\src\platform.cpp(40,42): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\thejo\source\crumble-king\src\platform.cpp(41,42): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\thejo\source\crumble-king\src\platform.cpp(42,38): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\thejo\source\crumble-king\src\platform.cpp(43,38): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\thejo\source\crumble-king\src\platform.cpp(46,54): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\thejo\source\crumble-king\src\platform.cpp(47,54): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\thejo\source\crumble-king\src\platform.cpp(48,46): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\thejo\source\crumble-king\src\platform.cpp(49,46): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\thejo\source\crumble-king\src\platform.cpp(119,19): error C3861: 'IsKeyDown': identifier not found
+C:\Users\thejo\source\crumble-king\src\platform.cpp(120,27): error C3861: 'IsKeyPressed': identifier not found
+C:\Users\thejo\source\crumble-king\src\platform.cpp(121,23): error C3861: 'IsKeyReleased': identifier not found
+C:\Users\thejo\source\crumble-king\src\platform.cpp(126,12): error C3861: 'LoadFileText': identifier not found
+C:\Users\thejo\source\crumble-king\src\platform.cpp(133,46): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\thejo\source\crumble-king\src\platform.cpp(138,29): error C3861: 'LoadSound': identifier not found
+C:\Users\thejo\source\crumble-king\src\platform.cpp(140,44): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\thejo\source\crumble-king\src\platform.cpp(155,5): error C3861: 'StopSound': identifier not found
+  random.cpp
+C:\Users\thejo\source\crumble-king\src\random.cpp(5,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  settings.cpp
+  sound.cpp
+  text_parsing.cpp
+  tiles.cpp
+C:\Users\thejo\source\crumble-king\src\tiles.cpp(52,42): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  tower.cpp
+  utils.cpp
+  vec2.cpp
+  Generating Code...

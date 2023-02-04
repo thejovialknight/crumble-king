@@ -1,0 +1,2 @@
+640 by 360 should be
+40 by 23, though go ahead and switch from tilemap soon enough

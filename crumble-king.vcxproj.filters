@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\animation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\collision.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\enemy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\food.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\high_scores.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\king.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\level.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\menu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\platform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\random.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\settings.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sound.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\text_parsing.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tiles.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tower.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\vec2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\animation.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\collision.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\enemy.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\food.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game_state.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\high_scores.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\hitch.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\king.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\level.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\menu.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\platform.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\random.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\rect.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\settings.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sound.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\text_parsing.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tiles.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tower.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\vec2.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\vec3.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="src\refactor-notes.txt">
+      <Filter>Source Files</Filter>
+    </Text>
+  </ItemGroup>
+</Project>

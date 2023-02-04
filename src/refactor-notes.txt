@@ -1,0 +1,22 @@
+REFACTOR NOTES
+- Change sprite_atlas_texture and atlas_texture to just atlas. I think I'll understand what that fucking means to be honest.
+- Figure out what you want to do about referencing sequences, and think hard about how to populate and initialize data in the best way possible.
+- Comb through codebase to find things that should be in settings.
+- Try to relegate functionality to the deepest part of the hierarchy possible without ANY friction.
+- IMPORTANT: Clean up code intent by adopting functional approaches wherever it will be clearest and...
+- Define wordy if conditionals in a bool before the if statement named with the intent of the bool.
+- Those damn update pre, post, and whatnot for levels need to have those overzealous parameters taken out!!
+- Refactor settings and whatever else to use the text parser. Game initialization code might have some of this?
+- What do we think about replacing calls that only serve to reduce redundancy within the same outer function with instead just bools that defer to a later time wherever possible? I kind of love the idea, to be honest.
+- Why are we populating the high scores menu with a populate function? This is declarative, you fuck. Make functions to draw list items in the damn switch statement. Well, actually. I suppose this is what allowed us to conveniently select items. If you can't fix that, whatevs. Either way, why not just populate a vector of menu items every frame, just because?
+- Can't do specific level music cleanly without messy hardcoding or what needs to be done, which is have the game keep track of strings that can be referenced for assets.
+- Background music should always be a variable, and code must be refactored so that there is a single callsite for events that change us between states and whatnot so we can know when to start and stop music at ONE callsite if possible.
+- New level format with just lists of entities.
+	maybe something like:
+	king:10,30;
+	foods:32,10;45,14;2,45;
+	tiles:32,1;33,1;34,1;etc...
+	etc...
+- No more storing sequences in entities. Enemies would need them all initialized and like what am I doing this for again? Less verbose function signatures? Really? Totally redundant and dumb.
+- This shit with PostLevelBehavior stuff is fucked, why not just have two post states, WON and LOST, instead of POST? That has the same information encoded into it ya??
+- For gods sakes figure out colliders origins all of this for sprites.
