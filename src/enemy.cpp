@@ -80,12 +80,18 @@ void update_enemies(std::vector<Enemy>& enemies, King& king, std::vector<Tile>& 
 
 bool is_king_caught(std::vector<Enemy>& enemies, King& king)
 {
-	const double distance_to_catch = 12;
+	//const double distance_to_catch = 12;
 
 	for(Enemy& enemy : enemies) {
+		if(is_colliding(enemy.collider, enemy.position, king.collider, king.position)) {
+			return true;
+		}
+
+		/* Old distance calculation
 		if(abs((king.position - enemy.position).magnitude()) <= distance_to_catch) {
 			return true;
 		}
+		*/
 	}
 
 	return false;

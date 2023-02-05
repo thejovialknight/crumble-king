@@ -1,5 +1,6 @@
 #include "level.h"
 #include <iostream>
+#include <SDL.h>
 
 Level::Level(LevelData* data, Sequences& sequences, Platform& platform) : data(data)
 {
@@ -14,7 +15,6 @@ Level::Level(LevelData* data, Sequences& sequences, Platform& platform) : data(d
     tile_sequence = &sequences.tile_center;
     window_sequence = &sequences.window;
     king.animator.sequence = &sequences.king_idle;
-    
 }
 
 void load_level(Level& level, Sequences& sequences, Sounds& sounds, Platform& platform)
@@ -27,8 +27,16 @@ void load_level(Level& level, Sequences& sequences, Sounds& sounds, Platform& pl
     for (const char c : level.data->tilemap) {
         if (c == '\n') { continue; }
         if (c == 'K') { level.king.position = grid_position_from_index(i); }
-        if (c == 'F') { level.food.windows.emplace_back(Window(grid_position_from_index(i))); }
-        if (c == 'E') { level.enemies.emplace_back(Enemy(grid_position_from_index(i))); }
+        if (c == 'F') { 
+            Vec2 p = grid_position_from_index(i);
+            p.y -= 8;
+            level.food.windows.emplace_back(Window(p));
+        }
+        if (c == 'E') { 
+            Vec2 p = grid_position_from_index(i);
+            p.y += 8;
+            level.enemies.emplace_back(Enemy(p)); 
+        }
         if (c == '#') { level.tiles.emplace_back(grid_position_from_index(i)); }
         i++;
     }
@@ -225,6 +233,34 @@ void render_level(Level& level, int atlas, Platform& platform)
         100,
         Vec3(0.9, 0.2, 0.2)
     ));
+
+    SDL_SetRenderDrawColor(platform.renderer, 255, 0, 0, 255);
+    for (Tile& tile : level.tiles) {
+        const SDL_Rect rect{
+            (int)(tile.position.x * platform.pixel_scalar),
+            (int)(tile.position.y * platform.pixel_scalar),
+            (int)(16 * platform.pixel_scalar),
+            (int)(16 * platform.pixel_scalar)
+        };
+        SDL_RenderDrawRect(platform.renderer, &rect);
+    }
+    for (Enemy& enemy : level.enemies) {
+        const SDL_Rect rect{
+            (int)(enemy.position.x * platform.pixel_scalar),
+            (int)(enemy.position.y * platform.pixel_scalar),
+            (int)(16 * platform.pixel_scalar),
+            (int)(21 * platform.pixel_scalar)
+        };
+        SDL_RenderDrawRect(platform.renderer, &rect);
+    }
+    const SDL_Rect rect{
+            (int)(level.king.position.x * platform.pixel_scalar),
+            (int)(level.king.position.y * platform.pixel_scalar),
+            (int)(16 * platform.pixel_scalar),
+            (int)(21 * platform.pixel_scalar)
+    };
+    SDL_RenderDrawRect(platform.renderer, &rect);
+    SDL_RenderPresent(platform.renderer);
 }
 
 void goto_post_level(Level& level, PostLevelBehavior behavior)

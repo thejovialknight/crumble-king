@@ -12,6 +12,7 @@ void update_food(int& out_score, Food& food, King& king, Sounds& sounds, Platfor
 	const int high_points = 100; // ^^
 	const int low_points = 50; // ^
 	const int end_points = 200; //
+	const Vec2 spawn_offset(0, 16);
 	
 	// Handle countdown
 	food.time_to_next_phase -= delta_time;
@@ -34,7 +35,7 @@ void update_food(int& out_score, Food& food, King& king, Sounds& sounds, Platfor
 				food.state = FoodState::POT;
 				food.time_to_next_phase = pot_expiration_length;
 				food.animator.sequence = food.bubbling_pot_sequence;
-				food.position = food.windows[pot_window_index].spawn_position;
+				food.position = food.windows[pot_window_index].spawn_position + spawn_offset;
 			} else {
 				food.state = FoodState::COOKING;
 				food.time_to_next_phase = cook_length;
@@ -46,7 +47,7 @@ void update_food(int& out_score, Food& food, King& king, Sounds& sounds, Platfor
 					if (!food.windows[food.current_window].is_active) { continue; }
 					found_eligible_window = true;
 					// TODO: I suppose food position is technically redundant
-					food.position = food.windows[food.current_window].spawn_position;
+					food.position = food.windows[food.current_window].spawn_position + spawn_offset;
 				}
 			}
 		}

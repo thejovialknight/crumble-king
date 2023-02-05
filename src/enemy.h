@@ -3,6 +3,7 @@
 #include "rect.h"
 #include "king.h"
 #include "tiles.h"
+#include "collision.h"
 
 enum class EnemyState {
 	PATROL,
@@ -16,8 +17,9 @@ struct Enemy {
 	Vec2 position;
 	Vec2 velocity;
 	double stored_x_direction; // -1 for left, 1 for right
-	Animator animator;
 	double time_to_unpause = 0;
+	Animator animator;
+    Rect collider = Rect(-4, -16, 12, 16);
 
 	Enemy(Vec2 position) : position(position) {}
 };

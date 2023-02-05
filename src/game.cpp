@@ -56,6 +56,7 @@ void init_game(Game& game, Platform& platform)
 
 void update_game(Game& game, Platform& platform, double delta_time)
 {
+    int z = 4;
     // TODO: On function key or something. This is a bit slow every frame, obviously.
     populate_settings(get_file_text("resources/config/config.txt"), game.settings);
 

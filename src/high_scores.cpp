@@ -17,5 +17,5 @@ void write_high_scores(std::vector<int>& scores, Platform& platform)
 			score_text += "0\n";
 		}
 	}
-    SaveFileText("resources/save/scores.txt", (char*)score_text.c_str()); 
+    write_file_text("resources/save/scores.txt", score_text.c_str()); 
 }

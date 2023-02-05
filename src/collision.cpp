@@ -1,6 +1,6 @@
 #include "collision.h"
 
-bool is_colliding(Rect a, Rect b)
+bool is_colliding(Rect& a, Rect& b)
 {
 	if(a.position.x < b.position.x + b.size.x &&
 		a.position.x + a.size.x > b.position.x &&
@@ -13,9 +13,26 @@ bool is_colliding(Rect a, Rect b)
 	return false;
 }
 
+bool is_colliding(Rect& a_col, Vec2& a_pos, Rect& b_col, Vec2& b_pos)
+{
+	Rect off_a_col = offset_collider(a_col, a_pos);
+	Rect off_b_col = offset_collider(b_col, b_pos);
+	return is_colliding(off_a_col, off_b_col);
+}
+
+Rect offset_collider(Rect& collider, Vec2& position)
+{
+	return Rect(
+		position.x + collider.position.x,
+		position.y + collider.position.y,
+		collider.size.x,
+		collider.size.y
+	);
+}
+
 void resolve_king_velocity(King& king, std::vector<Tile>& tiles, Sounds& sounds, Platform& platform, double delta_time)
 {
-	Rect player_collider(Vec2(king.position.x, king.position.y - 9), Vec2(16, 16));
+	Rect king_col = offset_collider(king.collider, king.position);
 	king.is_grounded = false;
 
 	// Loop through collision checks
@@ -23,23 +40,17 @@ void resolve_king_velocity(King& king, std::vector<Tile>& tiles, Sounds& sounds,
 		if (tile.health <= 0){
 			continue;
 		}
+		Rect tile_col = offset_collider(tile.collider, tile.position);
 
-		Rect tile_collider(Vec2(tile.position.x, tile.position.y), Vec2(16, 16));
-
-		Rect player_after_x_movement = player_collider;
-		player_after_x_movement.position.x += king.velocity.x * delta_time;
-
-		Rect player_after_y_movement = player_collider;
-		player_after_y_movement.position.y += king.velocity.y * delta_time;
-
-		Rect ground_check_rect = player_collider;
-		ground_check_rect.position.y += 0.75;
-
-		if(is_colliding(player_after_x_movement, tile_collider)) {
+		Rect king_post_x_vel = king_col;
+		king_post_x_vel.position.x += king.velocity.x * delta_time;
+		if(is_colliding(king_post_x_vel, tile_col)) {
 			king.velocity.x = 0;
 		}
 
-		if(is_colliding(player_after_y_movement, tile_collider)) {
+		Rect king_post_y_vel = king_col;
+		king_post_y_vel.position.y += king.velocity.y * delta_time;
+		if(is_colliding(king_post_y_vel, tile_col)) {
 			if (king.velocity.y > 0 && !tile.is_crumbling) {
 				tile.is_crumbling = true;
 				// TODO: Settings for crumble length
@@ -49,7 +60,9 @@ void resolve_king_velocity(King& king, std::vector<Tile>& tiles, Sounds& sounds,
 			king.velocity.y = 0;
 		}
 
-		if(king.velocity.y >= 0 && is_colliding(ground_check_rect, tile_collider)) {
+		Rect ground_check_rect = king_col;
+		ground_check_rect.position.y += 0.75;
+		if(king.velocity.y >= 0 && is_colliding(ground_check_rect, tile_col)) {
 			king.is_grounded = true;
 		}
 	}

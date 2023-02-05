@@ -63,10 +63,12 @@ struct PlatformText {
 };
 
 struct Platform {
+    Uint32 ticks_count;
     int actual_width;
     int actual_height;
     int logical_width;
     int logical_height;
+    double pixel_scalar;
     bool window_should_close = false;
     PlatformInput input;
     SDL_Window* window;
@@ -77,6 +79,7 @@ struct Platform {
     std::vector<PlatformSprite> sprites;
     std::vector<PlatformSound> sounds;
     std::vector<PlatformText> texts;
+    std::vector<PlatformButton*> buttons;
     Vec3 background_color = Vec3(0, 0, 0);
 };
 
@@ -85,11 +88,9 @@ void init_platform(Platform& platform);
 void update_platform(Platform& platform);
 void deinit_platform();
 
-// Input handling
-void query_button(PlatformButton& button);
-
 // Text loading
 const char* get_file_text(const char* fname);
+void write_file_text(const char* text, const char* fname);
 
 // Sprite handling
 int new_texture_handle(Platform& platform, const char* fname);
@@ -99,3 +100,6 @@ void put_sprite(Platform& platform, PlatformSprite sprite);
 int new_sound_handle(Platform& platform, const char* fname);
 void buffer_sound(Platform& platform, int handle, double volume);
 void stop_sound(Platform& platform, int handle);
+
+// Time handling
+double get_delta_time(Platform& platform);

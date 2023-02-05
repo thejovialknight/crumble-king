@@ -1,10 +1,10 @@
 #pragma once
-#include "vec2.h"
 #include "platform.h"
 #include "settings.h"
 #include "utils.h"
 #include "animation.h"
 #include "sound.h"
+#include "rect.h"
 
 enum class JumpState {
     GROUND,
@@ -23,6 +23,7 @@ struct King {
     bool is_grounded = false;
     bool is_facing_right = true;
     Animator animator;
+    Rect collider = Rect(-4, -16, 12, 16);
 };
 
 void update_king(King& king, Platform& platform, Sequences& sequences, Sounds& sounds, const Settings& settings, double delta_time);

@@ -3,6 +3,7 @@
 #include <unordered_map>
 #include "vec2.h"
 #include "utils.h"
+#include "rect.h"
 
 #define COLUMNS 40
 #define ROWS 23
@@ -12,6 +13,7 @@ struct Tile {
 	Vec2 position;
 	bool is_crumbling = false;
 	double time_till_crumble = 0;
+	Rect collider = Rect(-8, -8, 16, 16);
 
 	Tile(Vec2 position) : position(position) {}
 

@@ -2,24 +2,26 @@
 
 void init_platform(Platform& platform)
 {
-    platform.actual_width = 1920;
-    platform.actual_height = 1080;
+    platform.actual_width = 1280;
+    platform.actual_height = 720;
     platform.logical_width = 640;
     platform.logical_height = 360;
-    if(!SDL_Init(SDL_INIT_EVERYTHING))
-        std::cout << "Failed to initialize SDL!" << std::endl;
-    if(!SDL_CreateWindow("Crumble King", 20, 20, platform.actual_width, platform.actual_height, SDL_WINDOW_SHOWN)) 
-        std::cout << "Failed to create window!" << std::endl;
-    if (!SDL_CreateRenderer(platform.window, -1, SDL_RENDERER_ACCELERATED))
-        std::cout << "Failed to create renderer!" << std::endl;
-    if (!IMG_Init(IMG_INIT_PNG))
-        std::cout << "Failed to initialize SDL_image!" << std::endl;
-    if (!TTF_Init() == -1)
-        std::cout << "Failed to initialize SDL_ttf!" << std::endl;
-    if (Mix_OpenAudio(44100, AUDIO_S16SYS, 1, 4096) != 0)
-        std::cout << "Failed to initialize SDL_mixer!" << std::endl;
 
-    platform.font = TTF_OpenFont("resources/fonts/default.ttf", 32);
+    SDL_Init(SDL_INIT_EVERYTHING);
+    IMG_Init(IMG_INIT_PNG);
+    TTF_Init();
+    Mix_OpenAudio(44100, AUDIO_S16SYS, 1, 4096);
+    platform.window = SDL_CreateWindow("Crumble King", 20, 20, platform.actual_width, platform.actual_height, SDL_WINDOW_SHOWN);
+    platform.renderer = SDL_CreateRenderer(platform.window, -1, SDL_RENDERER_ACCELERATED);
+    platform.font = TTF_OpenFont("resources/fonts/Glory-Regular.ttf", 32);
+    platform.ticks_count = 0;
+
+    platform.buttons.push_back(&platform.input.left);
+    platform.buttons.push_back(&platform.input.right);
+    platform.buttons.push_back(&platform.input.up);
+    platform.buttons.push_back(&platform.input.down);
+    platform.buttons.push_back(&platform.input.jump);
+    platform.buttons.push_back(&platform.input.pause);
 }
 
 void update_platform(Platform& platform)
@@ -34,7 +36,7 @@ void update_platform(Platform& platform)
     SDL_RenderClear(platform.renderer);
     
     // SPRITES
-    float pixel_scalar = platform.actual_height / platform.logical_height;
+    platform.pixel_scalar = platform.actual_height / platform.logical_height;
     for (PlatformSprite& sprite : platform.sprites) {
         SDL_Rect source;
         source.x = sprite.source.position.x;
@@ -43,10 +45,10 @@ void update_platform(Platform& platform)
         source.h = sprite.source.size.y;
 
         SDL_Rect destination;
-        destination.x = (sprite.x + sprite.origin_x) * pixel_scalar;
-        destination.y = (sprite.y + sprite.origin_y) * pixel_scalar;
-        destination.w = sprite.source.size.x * pixel_scalar;
-        destination.h = sprite.source.size.y * pixel_scalar;
+        destination.x = (sprite.x - sprite.origin_x) * platform.pixel_scalar;
+        destination.y = (sprite.y - sprite.origin_y) * platform.pixel_scalar;
+        destination.w = sprite.source.size.x * platform.pixel_scalar;
+        destination.h = sprite.source.size.y * platform.pixel_scalar;
 
         SDL_RendererFlip flip = SDL_FLIP_NONE;
         if (sprite.is_flipped) {
@@ -96,55 +98,79 @@ void update_platform(Platform& platform)
     platform.sounds.clear();
 
     // INPUT (NEXT FRAME)
-    query_button(platform.input.left);
-    query_button(platform.input.right);
-    query_button(platform.input.up);
-    query_button(platform.input.down);
-    query_button(platform.input.jump);
-    query_button(platform.input.pause);
+    for (PlatformButton* button : platform.buttons) {
+        button->just_pressed = false;
+    }
 
-    /* Get window_should_close
-    if(!platform.window_should_close) {
-        platform.window_should_close = WindowShouldClose();
-    }*/
+    SDL_Event e;
+    while (SDL_PollEvent(&e)) {
+        switch (e.type) {
+        case SDL_QUIT:
+            platform.window_should_close = true;
+            break;
+        case SDL_KEYDOWN:
+            for(PlatformButton* btn : platform.buttons) {
+                if(e.key.keysym.scancode == btn->keycode) {
+                    if(!btn->held) 
+                        btn->just_pressed = true;
+                    btn->held = true;
+                }
+            }
+            break;
+        case SDL_KEYUP:
+            for(PlatformButton* btn : platform.buttons) {
+                if(e.key.keysym.scancode == btn->keycode) {
+                    if(btn->held) 
+                        btn->released = true;
+                    btn->held = false;
+                    btn->just_pressed = false;
+                }
+            }
+            break;
+        default:
+            break;
+        }
+    }
 }
 
 void deinit_platform()
 {
-    //CloseWindow();
-}
-
-void query_button(PlatformButton& button)
-{
-    button.held = IsKeyDown(button.keycode);
-    button.just_pressed = IsKeyPressed(button.keycode);
-    button.released = IsKeyReleased(button.keycode);
+    // TODO: deinit?
 }
 
 const char* get_file_text(const char* fname)
 {
     FILE* f;
-    if ((f = fopen(fname, "r")) == NULL) {
-        printf("Error opening file!");
+    char* txt;
+    long bytes;
+    
+    f = fopen(fname, "r");
+    if(f == NULL)
         return "";
-    }
-    const char* txt;
-    char ch;
-    do {
-        ch = fgetc(f);
-        printf("%c", ch);
+    
+    // Get byte length of file
+    fseek(f, 0L, SEEK_END);
+    bytes = ftell(f);
+    fseek(f, 0L, SEEK_SET);	
 
-        // Checking if character is not EOF.
-        // If it is EOF stop reading.
-    } while (ch != EOF);
-    fscanf(f, txt);
+    // Allocate memory for string
+    txt = (char*)calloc(bytes, sizeof(char));	
+    if(txt == NULL)
+        return "";
+
+    fread(txt, sizeof(char), bytes, f);
+    fclose(f);
     return txt;
 }
 
-void write_file_text(const char* text, const char* fname) 
+void write_file_text(const char* fname, const char* text)
 {
     FILE* f;
     f = fopen(fname, "w");
+    if (f == NULL) {
+        std::cout << "Cannot open file for writing!" << std::endl;
+        return;
+    }
     fprintf(f, text);
     fclose(f);
 }
@@ -156,11 +182,13 @@ int new_texture_handle(Platform& platform, const char* fname)
     return platform.texture_assets.size() - 1;
 }
 
+// TODO: Reimplement
 int new_sound_handle(Platform& platform, const char* fname)
 {
-    Mix_Chunk sound_asset = LoadSound(fname);
-    platform.sound_assets.emplace_back(sound_asset);
-    return platform.sound_assets.size() - 1;
+    //Mix_Chunk sound_asset = LoadSound(fname);
+    //platform.sound_assets.emplace_back(sound_asset);
+    //return platform.sound_assets.size() - 1;
+    return 1;
 }
 
 void put_sprite(Platform& platform, PlatformSprite sprite)
@@ -173,7 +201,17 @@ void buffer_sound(Platform& platform, int handle, double volume)
     platform.sounds.push_back(PlatformSound(handle, volume));
 }
 
+// TODO: Reimplement
 void stop_sound(Platform& platform, int handle)
 {
-    StopSound(platform.sound_assets[handle]);
+    //StopSound(platform.sound_assets[handle]);
+}
+
+double get_delta_time(Platform& platform)
+{
+    double delta_time = (SDL_GetTicks() - platform.ticks_count) / 1000.0f;
+    platform.ticks_count = SDL_GetTicks();
+    if (delta_time > 0.05)
+        delta_time = 0.05;
+    return delta_time;
 }
