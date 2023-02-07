@@ -24,11 +24,11 @@ Sounds load_sounds(Platform& platform)
 	sounds.lost_life = new_sound_handle(platform, "resources/sounds/lost_life.wav");
 	sounds.lost_game = new_sound_handle(platform, "resources/sounds/lost_game.wav");
 	// Music
-	sounds.music_menu = new_sound_handle(platform, "resources/sounds/music_menu.wav");
-	sounds.music_victory = new_sound_handle(platform, "resources/sounds/music_victory.wav");
-	sounds.music_level1 = new_sound_handle(platform, "resources/sounds/music_level1.wav");
-	sounds.music_level2 = new_sound_handle(platform, "resources/sounds/music_level2.wav");
-	sounds.music_level3 = new_sound_handle(platform, "resources/sounds/music_level3.wav");
+	sounds.music_menu = new_music_handle(platform, "resources/sounds/music_menu.wav");
+	sounds.music_victory = new_music_handle(platform, "resources/sounds/music_victory.wav");
+	sounds.music_level1 = new_music_handle(platform, "resources/sounds/music_level1.wav");
+	sounds.music_level2 = new_music_handle(platform, "resources/sounds/music_level2.wav");
+	sounds.music_level3 = new_music_handle(platform, "resources/sounds/music_level3.wav");
 	// Tile crumbles
 	sounds.tile_crumbles.push_back(new_sound_handle(platform, "resources/sounds/tile_crumble_1.wav"));
 	sounds.tile_crumbles.push_back(new_sound_handle(platform, "resources/sounds/tile_crumble_2.wav"));

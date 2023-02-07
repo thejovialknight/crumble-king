@@ -1,1 +1,2 @@
 C:\Users\thejo\repos\crumble-king\x64\Debug\crumble-king.exe
+C:\Users\thejo\source\crumble-king\x64\Debug\crumble-king.exe

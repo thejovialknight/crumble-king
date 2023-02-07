@@ -68,8 +68,6 @@ void load_level(Level& level, Sequences& sequences, Sounds& sounds, Platform& pl
     level.time_to_next_state = 2;
     level.post_level_info.ready_to_exit = false;
     level.post_level_info.behavior = PostLevelBehavior::RESTART;
-    // Music
-    stop_sound(platform, sounds.music_victory);
 }
 
 void update_level(Level& level, int atlas, Sequences& sequences, Sounds& sounds, Platform& platform, Settings& settings, double delta_time)
@@ -120,8 +118,7 @@ void handle_active_level(Level& level, int atlas, Sequences& sequences, Sounds& 
         platform.background_color = Vec3(0.5, 0, 0);
         goto_post_level(level, PostLevelBehavior::RESTART);
     } else if(level.food.level_complete) {
-        stop_sound(platform, music_from_level_name(level.data->name, sounds));
-        buffer_sound(platform, sounds.music_victory, 1);
+        set_music(platform, sounds.music_victory, 1);
         goto_post_level(level, PostLevelBehavior::ADVANCE);
     }
 }
@@ -131,7 +128,7 @@ void handle_pre_level(Level& level, int atlas, Sequences& sequences, Sounds& sou
     platform.background_color = Vec3(0, 0, 0);
     level.time_to_next_state -= delta_time;
     if(level.time_to_next_state <= 0 || platform.input.jump.just_pressed) {
-        buffer_sound(platform, music_from_level_name(level.data->name, sounds), 1);
+        set_music(platform, music_from_level_name(level.data->name, sounds), 1);
         level.state = LevelState::ACTIVE;
     }
 

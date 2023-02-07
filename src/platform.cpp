@@ -10,7 +10,7 @@ void init_platform(Platform& platform)
     SDL_Init(SDL_INIT_EVERYTHING);
     IMG_Init(IMG_INIT_PNG);
     TTF_Init();
-    Mix_OpenAudio(44100, AUDIO_S16SYS, 1, 4096);
+    Mix_OpenAudio(96000, AUDIO_S16SYS, 1, 4096);
     platform.window = SDL_CreateWindow("Crumble King", 20, 20, platform.actual_width, platform.actual_height, SDL_WINDOW_SHOWN);
     platform.renderer = SDL_CreateRenderer(platform.window, -1, SDL_RENDERER_ACCELERATED);
     platform.font = TTF_OpenFont("resources/fonts/Glory-Regular.ttf", 32);
@@ -93,7 +93,7 @@ void update_platform(Platform& platform)
 
     // SOUNDS
     for(PlatformSound& sound : platform.sounds) {
-        //PlaySound(platform.sound_assets[sound.handle]);
+        Mix_PlayChannel(-1, platform.sound_assets[sound.handle], 0);
     }
     platform.sounds.clear();
 
@@ -182,13 +182,28 @@ int new_texture_handle(Platform& platform, const char* fname)
     return platform.texture_assets.size() - 1;
 }
 
-// TODO: Reimplement
 int new_sound_handle(Platform& platform, const char* fname)
 {
-    //Mix_Chunk sound_asset = LoadSound(fname);
-    //platform.sound_assets.emplace_back(sound_asset);
-    //return platform.sound_assets.size() - 1;
-    return 1;
+    Mix_Chunk* snd = Mix_LoadWAV(fname);
+    if (snd == NULL)
+    {
+        printf("Failed to load sound effect! SDL_mixer Error: %s\n", Mix_GetError());
+        return 0;
+    }
+    platform.sound_assets.push_back(snd);
+    return platform.sound_assets.size() - 1;
+}
+
+int new_music_handle(Platform& platform, const char* fname)
+{
+    Mix_Music* snd = Mix_LoadMUS(fname);
+    if (snd == NULL)
+    {
+        printf("Failed to load music! SDL_mixer Error: %s\n", Mix_GetError());
+        return 0;
+    }
+    platform.music_assets.push_back(snd);
+    return platform.sound_assets.size() - 1;
 }
 
 void put_sprite(Platform& platform, PlatformSprite sprite)
@@ -201,10 +216,9 @@ void buffer_sound(Platform& platform, int handle, double volume)
     platform.sounds.push_back(PlatformSound(handle, volume));
 }
 
-// TODO: Reimplement
-void stop_sound(Platform& platform, int handle)
+void set_music(Platform & platform, int handle, double volume)
 {
-    //StopSound(platform.sound_assets[handle]);
+    Mix_PlayMusic(platform.music_assets[handle], -1);
 }
 
 double get_delta_time(Platform& platform)
@@ -215,3 +229,4 @@ double get_delta_time(Platform& platform)
         delta_time = 0.05;
     return delta_time;
 }
+

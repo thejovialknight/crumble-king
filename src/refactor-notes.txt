@@ -20,3 +20,4 @@ REFACTOR NOTES
 - No more storing sequences in entities. Enemies would need them all initialized and like what am I doing this for again? Less verbose function signatures? Really? Totally redundant and dumb.
 - This shit with PostLevelBehavior stuff is fucked, why not just have two post states, WON and LOST, instead of POST? That has the same information encoded into it ya??
 - For gods sakes figure out colliders origins all of this for sprites.
+- Input isn't pure, right? So just make it a handle, bith. It's THE way to get a reference to stuff by the platform. Probably pass in char when getting handle. Could even eventually have settings done in a program and just have the int saved for the handle so be data oriented that way.

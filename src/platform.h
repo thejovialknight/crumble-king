@@ -75,7 +75,8 @@ struct Platform {
     SDL_Renderer* renderer;
     TTF_Font* font;
     std::vector<SDL_Texture*> texture_assets;
-    std::vector<Mix_Chunk> sound_assets;
+    std::vector<Mix_Chunk*> sound_assets;
+    std::vector<Mix_Music*> music_assets;
     std::vector<PlatformSprite> sprites;
     std::vector<PlatformSound> sounds;
     std::vector<PlatformText> texts;
@@ -98,8 +99,9 @@ void put_sprite(Platform& platform, PlatformSprite sprite);
 
 // Sound handling
 int new_sound_handle(Platform& platform, const char* fname);
+int new_music_handle(Platform& platform, const char* fname);
 void buffer_sound(Platform& platform, int handle, double volume);
-void stop_sound(Platform& platform, int handle);
+void set_music(Platform& platform, int handle, double volume);
 
 // Time handling
 double get_delta_time(Platform& platform);

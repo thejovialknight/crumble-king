@@ -3,7 +3,7 @@
 void init_game(Game& game, Platform& platform)
 {
     game.sounds = load_sounds(platform);
-    buffer_sound(platform, game.sounds.music_menu, 1);
+    set_music(platform, game.sounds.music_menu, 1);
 
     // TODO: Functional = 
     populate_settings(get_file_text("resources/config/config.txt"), game.settings);
@@ -77,7 +77,6 @@ void update_game(Game& game, Platform& platform, double delta_time)
             game.tower->level_index = level_index_to_load; // CAREFUL! IN THE FUTURE THIS INDEX WON'T HAVE ANY CORRESPONDENCE TO THE TOWER INDEX
             game.tower->lives_remaining = 3;
             load_level(game.tower->level, game.sequences, game.sounds, platform);
-            stop_sound(platform, game.sounds.music_menu);
         }
         platform.background_color = Vec3(0, 0, 0);
         break;
@@ -87,7 +86,7 @@ void update_game(Game& game, Platform& platform, double delta_time)
             // TODO: Should we ALWAYS push back score? What about when we just quit?
             add_high_score(game.high_scores, game.tower->total_score);
             write_high_scores(game.high_scores, platform);
-            buffer_sound(platform, game.sounds.music_menu, 1);
+            set_music(platform, game.sounds.music_menu, 1);
             return_to_menu(game);
         }
         break;
