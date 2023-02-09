@@ -203,7 +203,7 @@ int new_music_handle(Platform& platform, const char* fname)
         return 0;
     }
     platform.music_assets.push_back(snd);
-    return platform.sound_assets.size() - 1;
+    return platform.music_assets.size() - 1;
 }
 
 void put_sprite(Platform& platform, PlatformSprite sprite)

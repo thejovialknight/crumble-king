@@ -112,6 +112,7 @@ void handle_active_level(Level& level, int atlas, Sequences& sequences, Sounds& 
 
     update_tiles(level.tiles, delta_time);
     update_enemies(level.enemies, level.king, level.tiles, level.surface_map, sequences, delta_time);
+    update_emotes(level.emotes, delta_time);
 
     if(is_king_dead(level.king, platform) || is_king_caught(level.enemies, level.king)) {
         level.ready_to_play_dead_sound = true;
@@ -222,6 +223,14 @@ void render_level(Level& level, int atlas, Platform& platform)
         level.king.animator,
         level.king.position
     ));
+    // Draw emotes
+    for(Emote& emote : level.emotes) {
+        put_sprite(platform, sprite_from_animator(
+            atlas,
+            emote.animator,
+            emote.target_position + emote.offset_position
+        ));
+    }
     // Draw points
     platform.texts.emplace_back(PlatformText(
         "Points: " + std::to_string(level.score),

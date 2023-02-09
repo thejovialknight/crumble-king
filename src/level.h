@@ -46,6 +46,7 @@ struct Level {
     Food food;
     std::vector<Tile> tiles;
     std::vector<Enemy> enemies;
+    std::vector<Emote> emotes;
 
     // Data
     LevelData* data;

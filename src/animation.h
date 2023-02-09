@@ -44,6 +44,8 @@ struct Animator {
 	double time_till_next_frame = 0;
 	double frame_length = 0.1;
 	bool is_flipped = false;
+	bool is_looping = true;
+	bool is_finished = false; // only true if not looping
 };
 
 void iterate_animator(Animator& animator, double delta_time);

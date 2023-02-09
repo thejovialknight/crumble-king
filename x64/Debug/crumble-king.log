@@ -1,18 +1,16 @@
 ﻿  platform.cpp
-C:\Users\thejo\source\crumble-king\src\platform.cpp(33,34): warning C4244: 'argument': conversion from 'double' to 'Uint8', possible loss of data
-C:\Users\thejo\source\crumble-king\src\platform.cpp(32,34): warning C4244: 'argument': conversion from 'double' to 'Uint8', possible loss of data
-C:\Users\thejo\source\crumble-king\src\platform.cpp(31,34): warning C4244: 'argument': conversion from 'double' to 'Uint8', possible loss of data
-C:\Users\thejo\source\crumble-king\src\platform.cpp(42,42): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\thejo\source\crumble-king\src\platform.cpp(43,42): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\thejo\source\crumble-king\src\platform.cpp(44,38): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\thejo\source\crumble-king\src\platform.cpp(45,38): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\thejo\source\crumble-king\src\platform.cpp(48,54): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\thejo\source\crumble-king\src\platform.cpp(49,54): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\thejo\source\crumble-king\src\platform.cpp(50,46): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\thejo\source\crumble-king\src\platform.cpp(51,46): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\thejo\source\crumble-king\src\platform.cpp(182,46): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\thejo\source\crumble-king\src\platform.cpp(194,44): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\thejo\source\crumble-king\src\platform.cpp(206,44): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
-  tower.cpp
-  Generating Code...
-  crumble-king.vcxproj -> C:\Users\thejo\source\crumble-king\x64\Debug\crumble-king.exe
+C:\Users\thejo\repos\crumble-king\src\platform.cpp(33,34): warning C4244: 'argument': conversion from 'double' to 'Uint8', possible loss of data
+C:\Users\thejo\repos\crumble-king\src\platform.cpp(32,34): warning C4244: 'argument': conversion from 'double' to 'Uint8', possible loss of data
+C:\Users\thejo\repos\crumble-king\src\platform.cpp(31,34): warning C4244: 'argument': conversion from 'double' to 'Uint8', possible loss of data
+C:\Users\thejo\repos\crumble-king\src\platform.cpp(42,42): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\thejo\repos\crumble-king\src\platform.cpp(43,42): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\thejo\repos\crumble-king\src\platform.cpp(44,38): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\thejo\repos\crumble-king\src\platform.cpp(45,38): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\thejo\repos\crumble-king\src\platform.cpp(48,54): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\thejo\repos\crumble-king\src\platform.cpp(49,54): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\thejo\repos\crumble-king\src\platform.cpp(50,46): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\thejo\repos\crumble-king\src\platform.cpp(51,46): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\thejo\repos\crumble-king\src\platform.cpp(182,46): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\thejo\repos\crumble-king\src\platform.cpp(194,44): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\thejo\repos\crumble-king\src\platform.cpp(206,44): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  crumble-king.vcxproj -> C:\Users\thejo\repos\crumble-king\x64\Debug\crumble-king.exe

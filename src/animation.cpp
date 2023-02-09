@@ -10,7 +10,12 @@ void iterate_animator(Animator& animator, double delta_time)
 
 	// Loop iteration outside of first if statement in case animation is changed to one with less frames
 	if (animator.frame >= animator.sequence->frames.size()) {
-		animator.frame = 0;
+		if(animator.is_looping) {
+			animator.frame = 0;
+		} else {
+			animator.frame--;
+			animator.is_finished = true;
+		}
 	}
 }
 
