@@ -35,6 +35,8 @@ struct Sequences {
 	Sequence guard_jump;
 	Sequence guard_end;
 	Sequence window;
+	Sequence emote_alarm;
+	Sequence emote_confused;
 };
 
 struct Animator {

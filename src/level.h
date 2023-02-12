@@ -8,6 +8,7 @@
 #include "sound.h"
 #include "enemy.h"
 #include "hitch.h"
+#include "emote.h"
 
 struct LevelData {
     std::string name;

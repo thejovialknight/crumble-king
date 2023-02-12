@@ -1,3 +1,7 @@
+// CURRENT PROGRESS: Happens after the call to update_food.
+// Put a breakpoint in level on hitch and windows are set correctly even in there.
+// It probably happens in the next tick somehow.
+
 #include "food.h"
 
 void update_food(int& out_score, Food& food, King& king, Sounds& sounds, Platform& platform, Settings& settings, HitchInfo& out_hitch, double delta_time)
@@ -68,7 +72,7 @@ void update_food(int& out_score, Food& food, King& king, Sounds& sounds, Platfor
 			buffer_sound(platform, sounds.food_alarm, 1);
 		}
 
-		// Handle king eating food
+		// Handle inactivation
 		if(food.time_to_next_phase <= 0) { 
 			buffer_sound(platform, sounds.food_expired, 1);
 			hide_food(food, inactive_length);
@@ -88,7 +92,7 @@ void update_food(int& out_score, Food& food, King& king, Sounds& sounds, Platfor
 			bool some_window_is_active = false;
 			for(Window& window : food.windows) {
 				if(window.is_active) { 
-					some_window_is_active = true; 
+ 					some_window_is_active = true; 
 					break;
 				}
 			}
@@ -98,6 +102,7 @@ void update_food(int& out_score, Food& food, King& king, Sounds& sounds, Platfor
 				food.time_to_next_phase = reset_length;
 				out_hitch = HitchInfo(true, reset_length);
 			}
+			int k = 0;
 		}
 	} else if (food.state == FoodState::POT) {
 		if(food.time_to_next_phase <= 0) {

@@ -228,7 +228,7 @@ void render_level(Level& level, int atlas, Platform& platform)
         put_sprite(platform, sprite_from_animator(
             atlas,
             emote.animator,
-            emote.target_position + emote.offset_position
+            *emote.target_position + emote.offset_position
         ));
     }
     // Draw points
