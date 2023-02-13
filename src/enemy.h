@@ -4,6 +4,7 @@
 #include "king.h"
 #include "tiles.h"
 #include "collision.h"
+#include "emote.h"
 
 enum class EnemyState {
 	PATROL,
@@ -24,7 +25,7 @@ struct Enemy {
 	Enemy(Vec2 position) : position(position) {}
 };
 
-void update_enemies(std::vector<Enemy>& enemies, King& king, std::vector<Tile>& tiles, SurfaceMap& surface_map, Sequences& sequences, double delta_time);
+void update_enemies(std::vector<Enemy>& enemies, King& king, std::vector<Tile>& tiles, SurfaceMap& surface_map, std::vector<Emote>& emotes, Sequences& sequences, double delta_time);
 bool is_king_caught(std::vector<Enemy>& enemies, King& king);
 // Returns -1 if not on platform. TODO: Maybe PlatformHandle with bool?
 Surface* surface_from_entity_position(Vec2& position, std::vector<Tile>& tiles, SurfaceMap& surface_map);

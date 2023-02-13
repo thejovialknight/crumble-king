@@ -111,7 +111,7 @@ void handle_active_level(Level& level, int atlas, Sequences& sequences, Sounds& 
     }
 
     update_tiles(level.tiles, delta_time);
-    update_enemies(level.enemies, level.king, level.tiles, level.surface_map, sequences, delta_time);
+    update_enemies(level.enemies, level.king, level.tiles, level.surface_map, level.emotes, sequences, delta_time);
     update_emotes(level.emotes, delta_time);
 
     if(is_king_dead(level.king, platform) || is_king_caught(level.enemies, level.king)) {
