@@ -164,12 +164,10 @@ void handle_post_level(Level& level, int atlas, Sequences& sequences, Platform& 
 } 
 
 void handle_hitch_level(Level& level, Settings& settings, double delta_time) {
-    update_food_reset(level.food, settings, delta_time);
-
+    if(level.food.state == FoodState::RESET) update_food_reset(level.food, settings, delta_time);
+    
     level.time_to_next_state -= delta_time;
-    if(level.time_to_next_state <= 0) {
-        level.state = LevelState::ACTIVE;
-    }
+    if(level.time_to_next_state <= 0) level.state = LevelState::ACTIVE;
 }
 
 void render_level(Level& level, int atlas, Platform& platform)

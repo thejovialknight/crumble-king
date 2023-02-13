@@ -35,7 +35,7 @@ void update_food(int& out_score, Food& food, King& king, Sounds& sounds, Platfor
 				}
 			}
 
-			if (window_count <= 1) {
+			if(window_count <= 1) {
 				food.state = FoodState::POT;
 				food.time_to_next_phase = pot_expiration_length;
 				food.animator.sequence = food.bubbling_pot_sequence;
@@ -46,9 +46,9 @@ void update_food(int& out_score, Food& food, King& king, Sounds& sounds, Platfor
 				food.animator.sequence = food.platter_sequence;
 				// Find eligible window
 				bool found_eligible_window = false;
-				while (!found_eligible_window) {
+				while(!found_eligible_window) {
 					food.current_window = random_int(food.windows.size());
-					if (!food.windows[food.current_window].is_active) { continue; }
+					if(!food.windows[food.current_window].is_active) { continue; }
 					found_eligible_window = true;
 					// TODO: I suppose food position is technically redundant
 					food.position = food.windows[food.current_window].spawn_position + spawn_offset;
@@ -102,7 +102,6 @@ void update_food(int& out_score, Food& food, King& king, Sounds& sounds, Platfor
 				food.time_to_next_phase = reset_length;
 				out_hitch = HitchInfo(true, reset_length);
 			}
-			int k = 0;
 		}
 	} else if (food.state == FoodState::POT) {
 		if(food.time_to_next_phase <= 0) {
@@ -130,7 +129,8 @@ void update_food(int& out_score, Food& food, King& king, Sounds& sounds, Platfor
 	iterate_animator(food.animator, delta_time);
 };
 
-void update_food_reset(Food& food, Settings& settings, double delta_time) {
+void update_food_reset(Food& food, Settings& settings, double delta_time) 
+{
 	const double alarm_pulse_length = 0.25; // TODO: Settings!! NOW DUPLICATED WARNING!!!!!
 
 	food.time_to_alarm -= delta_time;
