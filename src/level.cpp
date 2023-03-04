@@ -1,6 +1,6 @@
-#include "level.h"
 #include <iostream>
 #include <SDL.h>
+#include "level.h"
 
 Level::Level(LevelData* data, Sequences& sequences, Platform& platform) : data(data)
 {
