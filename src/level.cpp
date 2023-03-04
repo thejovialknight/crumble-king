@@ -100,19 +100,18 @@ void handle_active_level(Level& level, int atlas, Sequences& sequences, Sounds& 
 {
     platform.background_color = Vec3(0, 0, 0);
     level.surface_map = get_surface_map(level.tiles);
+    HitchInfo hitch(false, 0);
+
     update_king(level.king, platform, sequences, sounds, settings, delta_time);
     resolve_king_velocity(level.king, level.tiles, sounds, platform, delta_time);
-
-    HitchInfo hitch(false, 0);
     update_food(level.score, level.food, level.king, sounds, platform, settings, hitch, delta_time);
+    update_enemies(level.enemies, level.king, level.tiles, level.surface_map, level.emotes, sequences, sounds, platform, delta_time);
+    update_tiles(level.tiles, delta_time);
+
     if(hitch.should_hitch == true) {
         level.state = LevelState::HITCH;
         level.time_to_next_state = hitch.length;
     }
-
-    update_tiles(level.tiles, delta_time);
-    update_enemies(level.enemies, level.king, level.tiles, level.surface_map, level.emotes, sequences, delta_time);
-    update_emotes(level.emotes, delta_time);
 
     if(is_king_dead(level.king, platform) || is_king_caught(level.enemies, level.king)) {
         level.ready_to_play_dead_sound = true;
@@ -214,6 +213,13 @@ void render_level(Level& level, int atlas, Platform& platform)
             enemy.animator,
             enemy.position
         ));
+        if(enemy.emote.animator.is_visible) {
+            put_sprite(platform, sprite_from_animator(
+                atlas,
+                enemy.emote.animator,
+                enemy.position + Vec2(-8, -16) // TODO: SETTINGS!
+            ));
+        }
     }
     // Draw king
     put_sprite(platform, sprite_from_animator(
@@ -221,14 +227,6 @@ void render_level(Level& level, int atlas, Platform& platform)
         level.king.animator,
         level.king.position
     ));
-    // Draw emotes
-    for(Emote& emote : level.emotes) {
-        put_sprite(platform, sprite_from_animator(
-            atlas,
-            emote.animator,
-            *emote.target_position + emote.offset_position
-        ));
-    }
     // Draw points
     platform.texts.emplace_back(PlatformText(
         "Points: " + std::to_string(level.score),

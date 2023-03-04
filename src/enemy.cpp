@@ -1,7 +1,7 @@
 // TODO: Sounds
 #include "enemy.h"
 
-void update_enemies(std::vector<Enemy>& enemies, King& king, std::vector<Tile>& tiles, SurfaceMap& surface_map, std::vector<Emote>& emotes, Sequences& sequences, double delta_time)
+void update_enemies(std::vector<Enemy>& enemies, King& king, std::vector<Tile>& tiles, SurfaceMap& surface_map, std::vector<Emote>& emotes, Sequences& sequences, Sounds& sounds, Platform& platform, double delta_time)
 {
 	const double patrol_speed = 50; // TODO: Settings!
 	const double edge_tolerance = 0;
@@ -28,7 +28,8 @@ void update_enemies(std::vector<Enemy>& enemies, King& king, std::vector<Tile>& 
 			}
 
 			if(seen_king) {
-				emotes.emplace_back(Emote(&enemy.position, Vec2(-8, -16), &sequences.emote_alarm, 1));
+				buffer_sound(platform, sounds.enemy_seen_king, 1);
+				activate_emote(enemy.emote, &sequences.emote_alarm, 1);
 				enemy.velocity.x *= 1.5;
 				enemy.state = EnemyState::CHASE;
 			}
@@ -53,7 +54,8 @@ void update_enemies(std::vector<Enemy>& enemies, King& king, std::vector<Tile>& 
 				enemy.velocity.x = 0;
 				enemy.state = EnemyState::PAUSE;
 				enemy.time_to_unpause = lost_king_pause_length;
-				emotes.emplace_back(Emote(&enemy.position, Vec2(-8, -16), &sequences.emote_confused, 1));
+				buffer_sound(platform, sounds.enemy_lost_king, 1);
+				activate_emote(enemy.emote, &sequences.emote_confused, 1);
 			}
 		} else if(enemy.state == EnemyState::PAUSE) {
 			enemy.time_to_unpause -= delta_time;
@@ -78,6 +80,7 @@ void update_enemies(std::vector<Enemy>& enemies, King& king, std::vector<Tile>& 
 			}
 		}
 		iterate_animator(enemy.animator, delta_time);
+		update_emote(enemy.emote, delta_time);
 	}
 }
 

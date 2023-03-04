@@ -5,6 +5,7 @@
 #include "animation.h"
 #include "sound.h"
 #include "rect.h"
+#include "emote.h"
 
 enum class JumpState {
     GROUND,
