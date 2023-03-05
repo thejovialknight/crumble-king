@@ -1,9 +1,6 @@
 REFACTOR NOTES
-- Change sprite_atlas_texture and atlas_texture to just atlas. I think I'll understand what that fucking means to be honest.
-- Figure out what you want to do about referencing sequences, and think hard about how to populate and initialize data in the best way possible.
 - Comb through codebase to find things that should be in settings.
 - Try to relegate functionality to the deepest part of the hierarchy possible without ANY friction.
-- IMPORTANT: Clean up code intent by adopting functional approaches wherever it will be clearest and...
 - Define wordy if conditionals in a bool before the if statement named with the intent of the bool.
 - Those damn update pre, post, and whatnot for levels need to have those overzealous parameters taken out!!
 - Refactor settings and whatever else to use the text parser. Game initialization code might have some of this?
@@ -17,10 +14,4 @@ REFACTOR NOTES
 	foods:32,10;45,14;2,45;
 	tiles:32,1;33,1;34,1;etc...
 	etc...
-- This shit with PostLevelBehavior stuff is fucked, why not just have two post states, WON and LOST, instead of POST? That has the same information encoded into it ya??
-- For gods sakes figure out colliders origins all of this for sprites.
 - Input isn't pure, right? So just make it a handle, bith. It's THE way to get a reference to stuff by the platform. Probably pass in char when getting handle. Could even eventually have settings done in a program and just have the int saved for the handle so be data oriented that way.
-- It does clearly make more sense to have draw functions for each separatetype of thing because having drawing in the same file as logic makes the most sense. Same with initialization and loading and everything.
-- What should know about what? Should enemies know about emotes? Should emotes be in service of enemies, or should emotes inject themselves into the enemies' logic? Can you make a specific clarity or scalability argument about any given decision?
-- tick instead of update for update functions. Also, the handle_post_level type functions shuold really be in naming parity with update_level (soon to be tick_level) because in those functions you have things like update_king and theres no reason handle makes sense. The reason tick is better I think is because it means only what it means, which is a routine tick function, whereas update can now be cleared up as a word to mean some kind of updating of data in response to something, or a routine maintenance of some kind of data.
-- Are we still using ready_to_play_dead_sound in level? Dumb. Hmm, right. We are using it to play either the lost game sound or the lost life sound depending on our remaining lives

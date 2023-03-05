@@ -49,36 +49,36 @@ void tick_main_menu(MainMenu& menu, std::vector<LevelData>& levels, std::vector<
     if(menu.state == MainMenuState::MAIN) {
         // Handle selection
         if (platform.input.jump.just_pressed) {
-        switch (menu.list.selection) {
-        case 0:
-            menu.state = MainMenuState::LEVEL_SELECT;
-            menu.list.selection = 0;
-            populate_level_select_menu(menu.list, levels);
-            break;
-        case 1:
-            menu.state = MainMenuState::HIGH_SCORES;
-            menu.list.selection = 0;
-            populate_high_scores_menu(menu.list, scores);
-            break;
-        case 2:
-            if (menu.reset_confirmation) {
-                // High Scores text duplicated when we first populate. JIT solution is better!
-                menu.list.buttons[2].text = "Reset Data";
-                menu.should_reset_data = true;
-                menu.reset_confirmation = false;
-                buffer_sound(platform, sounds.menu_reset_data, 1);
-            } else {
-                menu.list.buttons[2].text = "Reset all score data?";
-                menu.reset_confirmation = true;
-                buffer_sound(platform, sounds.menu_reset_data_confirmation, 1);
+            switch (menu.list.selection) {
+            case 0:
+                menu.state = MainMenuState::LEVEL_SELECT;
+                menu.list.selection = 0;
+                populate_level_select_menu(menu.list, levels);
+                break;
+            case 1:
+                menu.state = MainMenuState::HIGH_SCORES;
+                menu.list.selection = 0;
+                populate_high_scores_menu(menu.list, scores);
+                break;
+            case 2:
+                if (menu.reset_confirmation) {
+                    // High Scores text duplicated when we first populate. JIT solution is better!
+                    menu.list.buttons[2].text = "Reset Data";
+                    menu.should_reset_data = true;
+                    menu.reset_confirmation = false;
+                    buffer_sound(platform, sounds.menu_reset_data, 1);
+                } else {
+                    menu.list.buttons[2].text = "Reset all score data?";
+                    menu.reset_confirmation = true;
+                    buffer_sound(platform, sounds.menu_reset_data_confirmation, 1);
+                }
+                break;
+            case 3:
+                platform.window_should_close = true;
+                break;
+            default:
+                break;
             }
-            break;
-        case 3:
-            platform.window_should_close = true;
-            break;
-        default:
-            break;
-        }
         }
 
         // Quit on escape

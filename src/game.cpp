@@ -5,9 +5,8 @@ void init_game(Game& game, Platform& platform)
     game.sounds = load_sounds(platform);
     set_music(platform, game.sounds.music_menu, 1);
 
-    // TODO: Functional = 
-    populate_settings(get_file_text("resources/config/config.txt"), game.settings);
-    populate_sequences(get_file_text("resources/sprites/sequences.txt"), game.sequences);
+    game.settings = load_settings(get_file_text("resources/config/config.txt"));
+    game.sequences = load_sequences(get_file_text("resources/sprites/sequences.txt"));
     
     // High scores. TODO: put in high_scores file
     std::string score_text = get_file_text("resources/save/scores.txt");

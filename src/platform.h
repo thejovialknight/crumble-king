@@ -30,6 +30,7 @@ struct PlatformInput {
     PlatformButton down = PlatformButton(SDL_SCANCODE_S);
     PlatformButton jump = PlatformButton(SDL_SCANCODE_SPACE);
     PlatformButton pause = PlatformButton(SDL_SCANCODE_ESCAPE);
+    PlatformButton debug_select = PlatformButton(SDL_SCANCODE_TAB);
 };
 
 struct PlatformSprite {

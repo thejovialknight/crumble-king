@@ -22,6 +22,7 @@ void init_platform(Platform& platform)
     platform.buttons.push_back(&platform.input.down);
     platform.buttons.push_back(&platform.input.jump);
     platform.buttons.push_back(&platform.input.pause);
+    platform.buttons.push_back(&platform.input.debug_select);
 
     set_random_seed();
 }

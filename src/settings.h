@@ -24,7 +24,7 @@ struct SettingsField {
 	std::string value = "";
 };
 
-void populate_settings(const std::string& text, Settings& settings);
+Settings load_settings(const std::string& text);
 bool try_field(const SettingsField& field, const std::string expected_key, std::string& out_value);
 bool try_int_field(const SettingsField& field, const std::string expected_key, int& out_value);
 bool try_double_field(const SettingsField& field, const std::string expected_key, double& out_value);

@@ -53,8 +53,9 @@ PlatformSprite sprite_from_sequence(int atlas, const Sequence& sequence, int fra
 	);
 }
 
-void populate_sequences(const std::string text, Sequences& sequences)
+Sequences load_sequences(const std::string text)
 {
+	Sequences sequences;
 	for (int i = 0; i < text.length(); ++i) {
 		if(!try_iterate_past_char('@', text, i)) break;
 		std::string sequence_name = pull_string_before_char(',', text, i);
@@ -97,4 +98,5 @@ void populate_sequences(const std::string text, Sequences& sequences)
 		if (sequence_name == "EMOTE_ALARM") { sequences.emote_alarm = sequence; }
 		if (sequence_name == "EMOTE_CONFUSED") { sequences.emote_confused = sequence; }
 	}
+	return sequences;
 }

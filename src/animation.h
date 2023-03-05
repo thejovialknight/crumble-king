@@ -56,4 +56,4 @@ struct Animator {
 void tick_animator(Animator& animator, double delta_time);
 PlatformSprite sprite_from_animator(int atlas, Animator& animator, const Vec2& position);
 PlatformSprite sprite_from_sequence(int atlas, const Sequence& sequence, int frame, const Vec2& position, bool is_flipped);
-void populate_sequences(const std::string text, Sequences& sequences);
+Sequences load_sequences(const std::string text);

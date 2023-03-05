@@ -1,8 +1,9 @@
 #include "settings.h"
 
 // Takes a string and 
-void populate_settings(const std::string& text, Settings& settings)
+Settings load_settings(const std::string& text)
 {
+	Settings settings;
 	// Loop through entire settings string, populating fields as we go
 	for(int i = 0; i < text.length(); ++i) {
 		// Skip to next key
@@ -46,6 +47,7 @@ void populate_settings(const std::string& text, Settings& settings)
 		// MISC
 		if(try_double_field(field, "GRAVITY", settings.gravity)) continue;
 	}
+	return settings;
 }
 
 bool try_field(const SettingsField& field, const std::string expected_key, std::string& out_value)
