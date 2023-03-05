@@ -145,7 +145,7 @@ void tick_post_level(Level& level, int atlas, Sequences& sequences, Platform& pl
 {
     for (Enemy& enemy : level.enemies) {
         enemy.animator.sequence = &sequences.guard_end;
-        enemy.animator.frame_length = 0.2;
+        enemy.animator.frame_length = 0.4;
         tick_animator(enemy.animator, delta_time);
     }
 

@@ -7,5 +7,5 @@ struct Emote {
 	double time_to_disappear;
 };
 
-void update_emote(Emote& emote, double delta_time);
+void tick_emote(Emote& emote, double delta_time);
 void activate_emote(Emote& emote, Sequence* sequence, double length);

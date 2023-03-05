@@ -68,7 +68,7 @@ void tick_enemies(std::vector<Enemy>& enemies, King& king, std::vector<Tile>& ti
 
 		enemy.animator.frame_length = 0.1;
 		if(seen_king) {
-			enemy.animator.frame_length = 0.06;
+			enemy.animator.frame_length = 0.066;
 		}
 		enemy.animator.sequence = &sequences.guard_idle;
 		if (enemy.velocity.x != 0) {
@@ -80,8 +80,24 @@ void tick_enemies(std::vector<Enemy>& enemies, King& king, std::vector<Tile>& ti
 			}
 		}
 		tick_animator(enemy.animator, delta_time);
-		update_emote(enemy.emote, delta_time);
+		tick_emote(enemy.emote, delta_time);
+
+		SDL_SetRenderDrawColor(platform.renderer, 255, 0, 0, 255);
+		Rect ca = offset_collider(enemy.collider, enemy.position);
+		SDL_Rect ra { 
+			(int)ca.position.x * platform.pixel_scalar, 
+			(int)ca.position.y* platform.pixel_scalar,
+			(int)ca.size.x * platform.pixel_scalar,
+			(int)ca.size.y * platform.pixel_scalar };
+		SDL_RenderDrawRect(platform.renderer, &ra);
 	}
+	Rect cb = offset_collider(king.collider, king.position);
+	SDL_Rect rb{ 
+		(int)cb.position.x * platform.pixel_scalar,
+		(int)cb.position.y * platform.pixel_scalar,
+		(int)cb.size.x * platform.pixel_scalar,
+		(int)cb.size.y * platform.pixel_scalar };
+	SDL_RenderDrawRect(platform.renderer, &rb);
 }
 
 bool is_king_caught(std::vector<Enemy>& enemies, King& king)
@@ -89,6 +105,7 @@ bool is_king_caught(std::vector<Enemy>& enemies, King& king)
 	//const double distance_to_catch = 12;
 
 	for(Enemy& enemy : enemies) {
+
 		if(is_colliding(enemy.collider, enemy.position, king.collider, king.position)) {
 			return true;
 		}

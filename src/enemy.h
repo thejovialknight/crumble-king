@@ -22,7 +22,7 @@ struct Enemy {
 	double stored_x_direction = 1; // -1 for left, 1 for right
 	double time_to_unpause = 0;
 	Animator animator;
-    Rect collider = Rect(-4, -16, 12, 16);
+    Rect collider = Rect(-4, -12, 9, 12);
 	Emote emote;
 
 	Enemy(Vec2 position) : position(position) {}

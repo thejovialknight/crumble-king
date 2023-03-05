@@ -1,6 +1,6 @@
 #include "emote.h"
 
-void update_emote(Emote& emote, double delta_time) 
+void tick_emote(Emote& emote, double delta_time) 
 {
 	if(!emote.animator.is_visible)
 		return;

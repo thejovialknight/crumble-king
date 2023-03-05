@@ -44,7 +44,7 @@ struct Animator {
 	Sequence* sequence = nullptr;
 	int frame = 0;
 	double time_till_next_frame = 0;
-	double frame_length = 0.1;
+	double frame_length = 0.2;
 	bool is_flipped = false;
 	bool is_looping = true;
 	bool is_finished = false; // only true if not looping
