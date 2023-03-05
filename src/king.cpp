@@ -1,6 +1,6 @@
 #include "king.h"
 
-void update_king(King& king, Platform& platform, Sequences& sequences, Sounds& sounds, const Settings& settings, double delta_time)
+void tick_king(King& king, Platform& platform, Sequences& sequences, Sounds& sounds, const Settings& settings, double delta_time)
 {
     const double max_speed = settings.king_max_speed;
     const double acceleration = settings.king_acceleration;
@@ -125,7 +125,7 @@ void update_king(King& king, Platform& platform, Sequences& sequences, Sounds& s
             king.animator.sequence = &sequences.king_float;
         }
     }
-    iterate_animator(king.animator, delta_time);
+    tick_animator(king.animator, delta_time);
 }
 
 bool is_king_dead(King& king, Platform& platform)
@@ -135,3 +135,45 @@ bool is_king_dead(King& king, Platform& platform)
     }
     return false;
 }
+
+void resolve_king_velocity(King& king, std::vector<Tile>& tiles, Sounds& sounds, Platform& platform, double delta_time)
+{
+	Rect king_col = offset_collider(king.collider, king.position);
+	king.is_grounded = false;
+
+	// Loop through collision checks
+	for(Tile& tile : tiles) {
+		if (tile.health <= 0){
+			continue;
+		}
+		Rect tile_col = offset_collider(tile.collider, tile.position);
+
+		Rect king_post_x_vel = king_col;
+		king_post_x_vel.position.x += king.velocity.x * delta_time;
+		if(is_colliding(king_post_x_vel, tile_col)) {
+			king.velocity.x = 0;
+		}
+
+		Rect king_post_y_vel = king_col;
+		king_post_y_vel.position.y += king.velocity.y * delta_time;
+		if(is_colliding(king_post_y_vel, tile_col)) {
+			if (king.velocity.y > 0 && !tile.is_crumbling) {
+				tile.is_crumbling = true;
+				// TODO: Settings for crumble length
+				tile.time_till_crumble = 0.5;
+				buffer_sound(platform, sounds.tile_crumbles[random_int(sounds.tile_crumbles.size())], 1);
+			}
+			king.velocity.y = 0;
+		}
+
+		Rect ground_check_rect = king_col;
+		ground_check_rect.position.y += 0.75;
+		if(king.velocity.y >= 0 && is_colliding(ground_check_rect, tile_col)) {
+			king.is_grounded = true;
+		}
+	}
+
+	king.position.x += king.velocity.x * delta_time;
+	king.position.y += king.velocity.y * delta_time;
+}
+

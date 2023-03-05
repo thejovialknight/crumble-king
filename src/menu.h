@@ -30,8 +30,8 @@ struct MainMenu {
     bool reset_confirmation = false;
 };
 
-void handle_menu_list(MenuList& list, Sounds& sounds, Platform& platform);
-void update_main_menu(MainMenu& menu, std::vector<LevelData>& levels, std::vector<int> scores, Sounds& sounds, Platform& platform);
+void tick_menu_list(MenuList& list, Sounds& sounds, Platform& platform);
+void tick_main_menu(MainMenu& menu, std::vector<LevelData>& levels, std::vector<int> scores, Sounds& sounds, Platform& platform);
 void populate_main_menu(MenuList& list);
 void populate_high_scores_menu(MenuList& list, std::vector<int>& scores);
 void populate_level_select_menu(MenuList& list, std::vector<LevelData>& levels);

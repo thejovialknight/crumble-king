@@ -5,7 +5,7 @@ void update_emote(Emote& emote, double delta_time)
 	if(!emote.animator.is_visible)
 		return;
 
-	iterate_animator(emote.animator, delta_time);
+	tick_animator(emote.animator, delta_time);
 	if (emote.animator.is_looping) {
 		emote.time_to_disappear -= delta_time;
 		if (emote.time_to_disappear <= 0) {

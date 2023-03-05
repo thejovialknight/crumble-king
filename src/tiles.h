@@ -32,5 +32,5 @@ struct SurfaceMap {
 
 Vec2 grid_position_from_index(int i);
 void put_tile(bool tiles[], int x, int y);
-void update_tiles(std::vector<Tile>& tiles, double delta_time);
+void tick_tiles(std::vector<Tile>& tiles, double delta_time);
 SurfaceMap get_surface_map(std::vector<Tile>& tiles);

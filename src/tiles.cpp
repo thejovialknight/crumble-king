@@ -14,7 +14,7 @@ void put_tile(bool tiles[], int x, int y)
     tiles[y * COLUMNS + x] = true;
 }
 
-void update_tiles(std::vector<Tile>& tiles, double delta_time)
+void tick_tiles(std::vector<Tile>& tiles, double delta_time)
 {
     for(Tile& tile : tiles) {
         if(tile.is_crumbling) {

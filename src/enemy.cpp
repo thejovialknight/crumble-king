@@ -1,7 +1,7 @@
 // TODO: Sounds
 #include "enemy.h"
 
-void update_enemies(std::vector<Enemy>& enemies, King& king, std::vector<Tile>& tiles, SurfaceMap& surface_map, std::vector<Emote>& emotes, Sequences& sequences, Sounds& sounds, Platform& platform, double delta_time)
+void tick_enemies(std::vector<Enemy>& enemies, King& king, std::vector<Tile>& tiles, SurfaceMap& surface_map, std::vector<Emote>& emotes, Sequences& sequences, Sounds& sounds, Platform& platform, double delta_time)
 {
 	const double patrol_speed = 50; // TODO: Settings!
 	const double edge_tolerance = 0;
@@ -79,7 +79,7 @@ void update_enemies(std::vector<Enemy>& enemies, King& king, std::vector<Tile>& 
 				enemy.animator.is_flipped = false;
 			}
 		}
-		iterate_animator(enemy.animator, delta_time);
+		tick_animator(enemy.animator, delta_time);
 		update_emote(enemy.emote, delta_time);
 	}
 }

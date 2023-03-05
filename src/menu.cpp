@@ -1,6 +1,6 @@
 #include "menu.h"
 
-void handle_menu_list(MenuList& list, Sounds& sounds, Platform& platform)
+void tick_menu_list(MenuList& list, Sounds& sounds, Platform& platform)
 {
     bool play_move_sound = false;
     // Iterate selection based on input
@@ -33,9 +33,9 @@ void handle_menu_list(MenuList& list, Sounds& sounds, Platform& platform)
     }
 }
 
-void update_main_menu(MainMenu& menu, std::vector<LevelData>& levels, std::vector<int> scores, Sounds& sounds, Platform& platform)
+void tick_main_menu(MainMenu& menu, std::vector<LevelData>& levels, std::vector<int> scores, Sounds& sounds, Platform& platform)
 {
-    handle_menu_list(menu.list, sounds, platform);
+    tick_menu_list(menu.list, sounds, platform);
 
     if (menu.list.selection != 2 && menu.reset_confirmation == true) {
         menu.reset_confirmation = false;

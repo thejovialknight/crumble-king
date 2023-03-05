@@ -22,6 +22,8 @@ void init_platform(Platform& platform)
     platform.buttons.push_back(&platform.input.down);
     platform.buttons.push_back(&platform.input.jump);
     platform.buttons.push_back(&platform.input.pause);
+
+    set_random_seed();
 }
 
 void update_platform(Platform& platform)
@@ -131,11 +133,6 @@ void update_platform(Platform& platform)
             break;
         }
     }
-}
-
-void deinit_platform()
-{
-    // TODO: deinit?
 }
 
 const char* get_file_text(const char* fname)

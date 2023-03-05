@@ -1,8 +1,8 @@
 #include "tower.h"
 
-void update_tower(Tower& tower, int atlas, Sequences& sequences, Sounds& sounds, Settings& settings, Platform& platform, double delta_time)
+void tick_tower(Tower& tower, int atlas, Sequences& sequences, Sounds& sounds, Settings& settings, Platform& platform, double delta_time)
 {
-    update_level(tower.level, atlas, sequences, sounds, platform, settings, delta_time);
+    tick_level(tower.level, atlas, sequences, sounds, platform, settings, delta_time);
     platform.texts.emplace_back(PlatformText(
         "Lives: " + std::to_string(tower.lives_remaining),
         64,

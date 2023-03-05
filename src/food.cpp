@@ -4,7 +4,7 @@
 
 #include "food.h"
 
-void update_food(int& out_score, Food& food, King& king, Sounds& sounds, Platform& platform, Settings& settings, HitchInfo& out_hitch, double delta_time)
+void tick_food(int& out_score, Food& food, King& king, Sounds& sounds, Platform& platform, Settings& settings, HitchInfo& out_hitch, double delta_time)
 {
 	const double inactive_length = settings.food_inactive_length;
 	const double cook_length = settings.food_cook_length;
@@ -126,10 +126,10 @@ void update_food(int& out_score, Food& food, King& king, Sounds& sounds, Platfor
 		}
 	}
 
-	iterate_animator(food.animator, delta_time);
+	tick_animator(food.animator, delta_time);
 };
 
-void update_food_reset(Food& food, Settings& settings, double delta_time) 
+void tick_food_reset(Food& food, Settings& settings, double delta_time) 
 {
 	const double alarm_pulse_length = 0.25; // TODO: Settings!! NOW DUPLICATED WARNING!!!!!
 

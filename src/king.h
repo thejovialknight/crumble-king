@@ -6,6 +6,8 @@
 #include "sound.h"
 #include "rect.h"
 #include "emote.h"
+#include "collision.h"
+#include "tiles.h"
 
 enum class JumpState {
     GROUND,
@@ -27,5 +29,6 @@ struct King {
     Rect collider = Rect(-4, -16, 12, 16);
 };
 
-void update_king(King& king, Platform& platform, Sequences& sequences, Sounds& sounds, const Settings& settings, double delta_time);
+void tick_king(King& king, Platform& platform, Sequences& sequences, Sounds& sounds, const Settings& settings, double delta_time);
 bool is_king_dead(King& king, Platform& platform);
+void resolve_king_velocity(King& king, std::vector<Tile>& tiles, Sounds& sounds, Platform& platform, double delta_time); 

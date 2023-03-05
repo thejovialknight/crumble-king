@@ -29,6 +29,6 @@ struct Game {
 };
 
 void init_game(Game& game, Platform& platform);
-void update_game(Game& game, Platform& platform, double delta_time);
+void tick_game(Game& game, Platform& platform, double delta_time);
 void return_to_menu(Game& game);
 void reset_data(Game& game, Platform& platform);

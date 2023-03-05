@@ -1,6 +1,6 @@
 #include "animation.h"
 
-void iterate_animator(Animator& animator, double delta_time)
+void tick_animator(Animator& animator, double delta_time)
 {
 	animator.time_till_next_frame -= delta_time;
 	if (animator.time_till_next_frame <= 0) {

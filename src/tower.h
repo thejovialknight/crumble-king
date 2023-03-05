@@ -18,4 +18,4 @@ struct Tower {
 	Tower(TowerData* data, Level level) : data(data), level(level) {}
 };
 
-void update_tower(Tower& tower, int atlas, Sequences& sequences, Sounds& sounds, Settings& settings, Platform& platform, double delta_time);
+void tick_tower(Tower& tower, int atlas, Sequences& sequences, Sounds& sounds, Settings& settings, Platform& platform, double delta_time);

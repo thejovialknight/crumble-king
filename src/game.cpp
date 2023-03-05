@@ -52,9 +52,13 @@ void init_game(Game& game, Platform& platform)
     tower.levels.push_back(&game.levels[1]);
     tower.levels.push_back(&game.levels[2]);
     game.towers.push_back(tower);
+
+    game.state = GameState::MENU;
+    game.menu = new MainMenu();
+    populate_main_menu(game.menu->list);
 }
 
-void update_game(Game& game, Platform& platform, double delta_time)
+void tick_game(Game& game, Platform& platform, double delta_time)
 {
     int z = 4;
     // TODO: On function key or something. This is a bit slow every frame, obviously.
@@ -62,7 +66,7 @@ void update_game(Game& game, Platform& platform, double delta_time)
 
     switch(game.state) {
     case GameState::MENU :
-        update_main_menu(*game.menu, game.levels, game.high_scores, game.sounds, platform);
+        tick_main_menu(*game.menu, game.levels, game.high_scores, game.sounds, platform);
         if (game.menu->should_reset_data) {
             reset_data(game, platform);
             game.menu->should_reset_data = false;
@@ -81,7 +85,7 @@ void update_game(Game& game, Platform& platform, double delta_time)
         platform.background_color = Vec3(0, 0, 0);
         break;
     case GameState::TOWER :
-        update_tower(*game.tower, game.atlas, game.sequences, game.sounds, game.settings, platform, delta_time);
+        tick_tower(*game.tower, game.atlas, game.sequences, game.sounds, game.settings, platform, delta_time);
         if(game.tower->ready_to_exit) {
             // TODO: Should we ALWAYS push back score? What about when we just quit?
             add_high_score(game.high_scores, game.tower->total_score);

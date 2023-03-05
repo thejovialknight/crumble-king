@@ -34,6 +34,6 @@ struct Food {
 	bool level_complete = false;
 };
 
-void update_food(int& out_score, Food& food, King& king, Sounds& sounds, Platform& platform, Settings& settings, HitchInfo& out_hitch, double delta_time);
-void update_food_reset(Food& food, Settings& settings, double delta_time);
+void tick_food(int& out_score, Food& food, King& king, Sounds& sounds, Platform& platform, Settings& settings, HitchInfo& out_hitch, double delta_time);
+void tick_food_reset(Food& food, Settings& settings, double delta_time);
 void hide_food(Food& food, double inactive_length);

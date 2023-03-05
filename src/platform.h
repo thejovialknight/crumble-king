@@ -11,6 +11,7 @@
 #include "vec3.h"
 #include "settings.h"
 #include "rect.h"
+#include "random.h"
 
 struct PlatformButton {
     int keycode;
@@ -87,7 +88,6 @@ struct Platform {
 // Platform management
 void init_platform(Platform& platform);
 void update_platform(Platform& platform);
-void deinit_platform();
 
 // Text loading
 const char* get_file_text(const char* fname);

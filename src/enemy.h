@@ -28,7 +28,7 @@ struct Enemy {
 	Enemy(Vec2 position) : position(position) {}
 };
 
-void update_enemies(std::vector<Enemy>& enemies, King& king, std::vector<Tile>& tiles, SurfaceMap& surface_map, std::vector<Emote>& emotes, Sequences& sequences, Sounds& sounds, Platform& platform, double delta_time);
+void tick_enemies(std::vector<Enemy>& enemies, King& king, std::vector<Tile>& tiles, SurfaceMap& surface_map, std::vector<Emote>& emotes, Sequences& sequences, Sounds& sounds, Platform& platform, double delta_time);
 bool is_king_caught(std::vector<Enemy>& enemies, King& king);
 // Returns -1 if not on platform. TODO: Maybe PlatformHandle with bool?
 Surface* surface_from_entity_position(Vec2& position, std::vector<Tile>& tiles, SurfaceMap& surface_map);
