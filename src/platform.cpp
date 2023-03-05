@@ -221,6 +221,10 @@ void set_music(Platform & platform, int handle, double volume)
     Mix_PlayMusic(platform.music_assets[handle], -1);
 }
 
+void stop_music() {
+    Mix_HaltMusic();
+}
+
 double get_delta_time(Platform& platform)
 {
     double delta_time = (SDL_GetTicks() - platform.ticks_count) / 1000.0f;

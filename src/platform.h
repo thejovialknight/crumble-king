@@ -102,6 +102,7 @@ int new_sound_handle(Platform& platform, const char* fname);
 int new_music_handle(Platform& platform, const char* fname);
 void buffer_sound(Platform& platform, int handle, double volume);
 void set_music(Platform& platform, int handle, double volume);
+void stop_music();
 
 // Time handling
 double get_delta_time(Platform& platform);

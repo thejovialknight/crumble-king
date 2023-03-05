@@ -106,7 +106,7 @@ bool is_king_caught(std::vector<Enemy>& enemies, King& king)
 Surface* surface_from_entity_position(Vec2& position, std::vector<Tile>& tiles, SurfaceMap& surface_map)
 {
 	const double x_tolerance = 12; // TODO: Settings
-	const double y_tolerance = 16; // TODO: Settings
+	const double y_tolerance = 12; // TODO: Settings
 
 	Vec2 projected_position = Vec2(position.x, position.y + 16);
 	for(int i = 0; i < tiles.size(); ++i) {

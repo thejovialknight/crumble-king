@@ -37,6 +37,11 @@ PlatformSprite sprite_from_animator(int atlas, Animator& animator, const Vec2& p
 
 PlatformSprite sprite_from_sequence(int atlas, const Sequence& sequence, int frame, const Vec2& position, bool is_flipped)
 {
+	// Validate frame in case sprite has been changed and animator has not been updated.
+	// TODO: Perhaps this would be easier to validate ourselves if we had draw functions for each guy.
+	if (sequence.frames.size() - 1 < frame || frame < 0)
+		frame = 0;
+
 	return PlatformSprite(
 		atlas,
 		sequence.frames[frame],

@@ -115,7 +115,7 @@ void handle_active_level(Level& level, int atlas, Sequences& sequences, Sounds& 
 
     if(is_king_dead(level.king, platform) || is_king_caught(level.enemies, level.king)) {
         level.ready_to_play_dead_sound = true;
-        platform.background_color = Vec3(0.5, 0, 0);
+        stop_music();
         goto_post_level(level, PostLevelBehavior::RESTART);
     } else if(level.food.level_complete) {
         set_music(platform, sounds.music_victory, 1);
@@ -125,6 +125,7 @@ void handle_active_level(Level& level, int atlas, Sequences& sequences, Sounds& 
 
 void handle_pre_level(Level& level, int atlas, Sequences& sequences, Sounds& sounds, Platform& platform, Settings& settings, double delta_time)
 {
+    stop_music();
     platform.background_color = Vec3(0, 0, 0);
     level.time_to_next_state -= delta_time;
     if(level.time_to_next_state <= 0 || platform.input.jump.just_pressed) {
@@ -236,32 +237,6 @@ void render_level(Level& level, int atlas, Platform& platform)
         Vec3(0.9, 0.2, 0.2)
     ));
 
-    SDL_SetRenderDrawColor(platform.renderer, 255, 0, 0, 255);
-    for (Tile& tile : level.tiles) {
-        const SDL_Rect rect{
-            (int)(tile.position.x * platform.pixel_scalar),
-            (int)(tile.position.y * platform.pixel_scalar),
-            (int)(16 * platform.pixel_scalar),
-            (int)(16 * platform.pixel_scalar)
-        };
-        SDL_RenderDrawRect(platform.renderer, &rect);
-    }
-    for (Enemy& enemy : level.enemies) {
-        const SDL_Rect rect{
-            (int)(enemy.position.x * platform.pixel_scalar),
-            (int)(enemy.position.y * platform.pixel_scalar),
-            (int)(16 * platform.pixel_scalar),
-            (int)(21 * platform.pixel_scalar)
-        };
-        SDL_RenderDrawRect(platform.renderer, &rect);
-    }
-    const SDL_Rect rect{
-            (int)(level.king.position.x * platform.pixel_scalar),
-            (int)(level.king.position.y * platform.pixel_scalar),
-            (int)(16 * platform.pixel_scalar),
-            (int)(21 * platform.pixel_scalar)
-    };
-    SDL_RenderDrawRect(platform.renderer, &rect);
     SDL_RenderPresent(platform.renderer);
 }
 
