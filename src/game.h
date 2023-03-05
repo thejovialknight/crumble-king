@@ -30,5 +30,5 @@ struct Game {
 
 void init_game(Game& game, Platform& platform);
 void tick_game(Game& game, Platform& platform, double delta_time);
-void return_to_menu(Game& game);
+void return_to_menu(Game& game, bool is_showing_high_score);
 void reset_data(Game& game, Platform& platform);

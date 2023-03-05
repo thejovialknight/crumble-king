@@ -1,5 +1,4 @@
-﻿  menu.cpp
-C:\Users\thejo\repos\crumble-king\src\menu.cpp(10,75): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-  tower.cpp
-  Generating Code...
+﻿  level.cpp
+C:\Users\thejo\repos\crumble-king\src\level.cpp(14,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\thejo\repos\crumble-king\src\level.cpp(52,95): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
   crumble-king.vcxproj -> C:\Users\thejo\repos\crumble-king\x64\Debug\crumble-king.exe

@@ -7,12 +7,18 @@ struct TowerData {
 	std::vector<LevelData*> levels;
 };
 
+enum class TowerState {
+	ACTIVE,
+	QUIT,
+	GAME_OVER
+};
+
 struct Tower {
+	TowerState state = TowerState::ACTIVE;
 	Level level;
 	TowerData* data;
 	int level_index = 0;
 	int lives_remaining = 3; // TODO: Settings
-	bool ready_to_exit = false;
 	int total_score = 0;
 
 	Tower(TowerData* data, Level level) : data(data), level(level) {}

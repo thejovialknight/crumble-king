@@ -29,4 +29,3 @@ Rect offset_collider(Rect& collider, Vec2& position)
 		collider.size.y
 	);
 }
-

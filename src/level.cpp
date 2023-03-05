@@ -66,8 +66,6 @@ void load_level(Level& level, Sequences& sequences, Sounds& sounds, Platform& pl
     // Initiate pre level
     level.state = LevelState::PRE;
     level.time_to_next_state = 2;
-    level.post_level_info.ready_to_exit = false;
-    level.post_level_info.behavior = PostLevelBehavior::RESTART;
     stop_music();
 }
 
@@ -80,7 +78,11 @@ void tick_level(Level& level, int atlas, Sequences& sequences, Sounds& sounds, P
     case LevelState::ACTIVE:
         tick_active_level(level, atlas, sequences, sounds, platform, settings, delta_time);
         break;
-    case LevelState::POST:
+    case LevelState::WON:
+        level.king.position.y -= 300 * delta_time; // TODO: SETTINGS!
+        tick_post_level(level, atlas, sequences, platform, settings, delta_time);
+        break;
+    case LevelState::LOST:
         tick_post_level(level, atlas, sequences, platform, settings, delta_time);
         break;
     case LevelState::HITCH:
@@ -91,7 +93,7 @@ void tick_level(Level& level, int atlas, Sequences& sequences, Sounds& sounds, P
     // Menu on escape
     if (platform.input.pause.just_pressed) {
         buffer_sound(platform, sounds.menu_select, 1);
-        goto_post_level(level, PostLevelBehavior::QUIT);
+        level.state = LevelState::QUIT;
     }
 
     draw_level(level, atlas, platform);
@@ -115,12 +117,14 @@ void tick_active_level(Level& level, int atlas, Sequences& sequences, Sounds& so
     }
 
     if(is_king_dead(level.king, platform) || is_king_caught(level.enemies, level.king)) {
-        level.ready_to_play_dead_sound = true;
         stop_music();
-        goto_post_level(level, PostLevelBehavior::RESTART);
+        level.ready_to_play_dead_sound = true;
+        level.time_to_next_state = 4; // TODO: Settings!
+        level.state = LevelState::LOST;
     } else if(level.food.level_complete) {
         set_music(platform, sounds.music_victory, 1);
-        goto_post_level(level, PostLevelBehavior::ADVANCE);
+        level.time_to_next_state = 4; // TODO: Settings!
+        level.state = LevelState::WON;
     }
 }
 
@@ -139,28 +143,17 @@ void tick_pre_level(Level& level, int atlas, Sequences& sequences, Sounds& sound
 
 void tick_post_level(Level& level, int atlas, Sequences& sequences, Platform& platform, Settings& settings, double delta_time)
 {
-    const double level_complete_float_speed = 300; // TODO: Settings!
-
     for (Enemy& enemy : level.enemies) {
         enemy.animator.sequence = &sequences.guard_end;
         enemy.animator.frame_length = 0.2;
         tick_animator(enemy.animator, delta_time);
     }
 
-    // TODO: None of this advance bullshit, wait for the level state refactor
-    if (level.post_level_info.behavior == PostLevelBehavior::ADVANCE) {
-        level.king.position.y -= level_complete_float_speed * delta_time;
-        level.time_to_next_state -= delta_time;
-        if (level.time_to_next_state <= 0 || platform.input.jump.just_pressed) {
-            level.post_level_info.ready_to_exit = true;
-        }
-    }
-
     level.time_to_next_state -= delta_time;
-    if (level.time_to_next_state <= 0 || platform.input.jump.just_pressed) {
-        level.post_level_info.ready_to_exit = true;
+    if (platform.input.jump.just_pressed) {
+        level.time_to_next_state = -1;
     }
-} 
+}
 
 void tick_hitch_level(Level& level, Settings& settings, double delta_time) {
     if(level.food.state == FoodState::RESET) tick_food_reset(level.food, settings, delta_time);
@@ -237,17 +230,6 @@ void draw_level(Level& level, int atlas, Platform& platform)
     ));
 
     SDL_RenderPresent(platform.renderer);
-}
-
-void goto_post_level(Level& level, PostLevelBehavior behavior)
-{
-    level.time_to_next_state = 3;
-    if(behavior == PostLevelBehavior::ADVANCE) {
-        // TODO: lol
-        level.time_to_next_state = 100000000;
-    }
-    level.state = LevelState::POST;
-    level.post_level_info.behavior = behavior;
 }
 
 int music_from_level_name(std::string& name, Sounds& sounds)

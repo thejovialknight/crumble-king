@@ -60,9 +60,8 @@ void init_game(Game& game, Platform& platform)
 
 void tick_game(Game& game, Platform& platform, double delta_time)
 {
-    int z = 4;
     // TODO: On function key or something. This is a bit slow every frame, obviously.
-    populate_settings(get_file_text("resources/config/config.txt"), game.settings);
+    // populate_settings(get_file_text("resources/config/config.txt"), game.settings);
 
     switch(game.state) {
     case GameState::MENU :
@@ -86,12 +85,13 @@ void tick_game(Game& game, Platform& platform, double delta_time)
         break;
     case GameState::TOWER :
         tick_tower(*game.tower, game.atlas, game.sequences, game.sounds, game.settings, platform, delta_time);
-        if(game.tower->ready_to_exit) {
-            // TODO: Should we ALWAYS push back score? What about when we just quit?
+        if(game.tower->state == TowerState::QUIT) {
+            set_music(platform, game.sounds.music_menu, 1);
+            return_to_menu(game, false);
+        } else if(game.tower->state == TowerState::GAME_OVER) {
             add_high_score(game.high_scores, game.tower->total_score);
             write_high_scores(game.high_scores, platform);
-            set_music(platform, game.sounds.music_menu, 1);
-            return_to_menu(game);
+            return_to_menu(game, true);
         }
         break;
     default :
@@ -99,13 +99,19 @@ void tick_game(Game& game, Platform& platform, double delta_time)
     }
 }
 
-void return_to_menu(Game& game)
+void return_to_menu(Game& game, bool is_showing_high_score)
 {
     delete game.tower;
     game.state = GameState::MENU;
     game.menu = new MainMenu();
-    game.menu->state = MainMenuState::LEVEL_SELECT;
-    populate_level_select_menu(game.menu->list, game.levels);
+
+    if(is_showing_high_score) {
+        game.menu->state = MainMenuState::HIGH_SCORES;
+        populate_high_scores_menu(game.menu->list, game.high_scores);
+    } else {
+        game.menu->state = MainMenuState::LEVEL_SELECT;
+        populate_level_select_menu(game.menu->list, game.levels);
+    }
 }
 
 void reset_data(Game& game, Platform& platform)
