@@ -1,7 +1,7 @@
 // TODO: Sounds
 #include "enemy.h"
 
-void tick_enemies(std::vector<Enemy>& enemies, King& king, std::vector<Tile>& tiles, SurfaceMap& surface_map, std::vector<Emote>& emotes, Sequences& sequences, Sounds& sounds, Platform& platform, double delta_time)
+void tick_enemies(std::vector<Enemy>& enemies, King& king, std::vector<Tile>& tiles, SurfaceMap& surface_map, std::vector<Emote>& emotes, Sequences& sequences, Sounds& sounds, Settings& settings, Platform& platform, double delta_time)
 {
 	const double patrol_speed = 50; // TODO: Settings!
 	const double edge_tolerance = 0;
@@ -16,6 +16,12 @@ void tick_enemies(std::vector<Enemy>& enemies, King& king, std::vector<Tile>& ti
 			enemy.state = EnemyState::LOST;
 		}
 
+		enemy.visual_y_velocity += settings.gravity * delta_time;
+		enemy.visual_y_offset += enemy.visual_y_velocity * delta_time;
+		if(enemy.visual_y_offset >= 0) {
+			enemy.visual_y_offset = 0;
+		}
+
 		bool seen_left = (enemy.velocity.x > 0 && enemy.position.x < king.position.x);
 		bool seen_right = (enemy.velocity.x < 0 && enemy.position.x > king.position.x);
 		bool seen_king = (enemy_surface == king_surface && (seen_left || seen_right));
@@ -28,6 +34,7 @@ void tick_enemies(std::vector<Enemy>& enemies, King& king, std::vector<Tile>& ti
 			}
 
 			if(seen_king) {
+				enemy.visual_y_velocity = -70;
 				buffer_sound(platform, sounds.enemy_seen_king, 1);
 				activate_emote(enemy.emote, &sequences.emote_alarm, 1);
 				enemy.velocity.x *= 1.5;
@@ -81,23 +88,7 @@ void tick_enemies(std::vector<Enemy>& enemies, King& king, std::vector<Tile>& ti
 		}
 		tick_animator(enemy.animator, delta_time);
 		tick_emote(enemy.emote, delta_time);
-
-		SDL_SetRenderDrawColor(platform.renderer, 255, 0, 0, 255);
-		Rect ca = offset_collider(enemy.collider, enemy.position);
-		SDL_Rect ra { 
-			(int)ca.position.x * platform.pixel_scalar, 
-			(int)ca.position.y* platform.pixel_scalar,
-			(int)ca.size.x * platform.pixel_scalar,
-			(int)ca.size.y * platform.pixel_scalar };
-		SDL_RenderDrawRect(platform.renderer, &ra);
 	}
-	Rect cb = offset_collider(king.collider, king.position);
-	SDL_Rect rb{ 
-		(int)cb.position.x * platform.pixel_scalar,
-		(int)cb.position.y * platform.pixel_scalar,
-		(int)cb.size.x * platform.pixel_scalar,
-		(int)cb.size.y * platform.pixel_scalar };
-	SDL_RenderDrawRect(platform.renderer, &rb);
 }
 
 bool is_king_caught(std::vector<Enemy>& enemies, King& king)
@@ -109,12 +100,6 @@ bool is_king_caught(std::vector<Enemy>& enemies, King& king)
 		if(is_colliding(enemy.collider, enemy.position, king.collider, king.position)) {
 			return true;
 		}
-
-		/* Old distance calculation
-		if(abs((king.position - enemy.position).magnitude()) <= distance_to_catch) {
-			return true;
-		}
-		*/
 	}
 
 	return false;

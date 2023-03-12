@@ -1,6 +1,7 @@
 #pragma once
 #include <unordered_map>
 #include "level.h"
+#include "sound.h"
 
 enum class LevelEditorEntityType {
 	KING,
@@ -20,6 +21,6 @@ struct LevelEditor {
 	std::vector<LevelEditorEntity> entities;
 };
 
-void load_editor(LevelEditor& level, Sequences& sequences, Sound& sound, Platform& platform);
+void load_editor(LevelEditor& level, Sequences& sequences, Sounds& sounds, Platform& platform);
 void tick_editor(LevelEditor& editor, Platform& platform);
 void draw_editor(LevelEditor& editor, int atlas, Platform& platform);

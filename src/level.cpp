@@ -107,7 +107,7 @@ void tick_active_level(Level& level, int atlas, Sequences& sequences, Sounds& so
 
     tick_king(level.king, platform, sequences, sounds, settings, delta_time);
     tick_food(level.score, level.food, level.king, sounds, platform, settings, hitch, delta_time);
-    tick_enemies(level.enemies, level.king, level.tiles, level.surface_map, level.emotes, sequences, sounds, platform, delta_time);
+    tick_enemies(level.enemies, level.king, level.tiles, level.surface_map, level.emotes, sequences, sounds, settings, platform, delta_time);
     tick_tiles(level.tiles, delta_time);
     resolve_king_velocity(level.king, level.tiles, sounds, platform, delta_time);
 
@@ -201,10 +201,14 @@ void draw_level(Level& level, int atlas, Platform& platform)
     }
     // Draw enemies
     for(Enemy& enemy : level.enemies) {
+        Vec2 enemy_pos(
+            enemy.position.x,
+            enemy.position.y + enemy.visual_y_offset
+        );
         put_sprite(platform, sprite_from_animator(
             atlas,
             enemy.animator,
-            enemy.position
+            enemy_pos
         ));
         if(enemy.emote.animator.is_visible) {
             put_sprite(platform, sprite_from_animator(

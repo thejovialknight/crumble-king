@@ -1,27 +1,6 @@
 ﻿  enemy.cpp
-C:\Users\thejo\repos\crumble-king\src\enemy.cpp(88,23): warning C4838: conversion from 'double' to 'int' requires a narrowing conversion
-C:\Users\thejo\repos\crumble-king\src\enemy.cpp(88,23): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\thejo\repos\crumble-king\src\enemy.cpp(89,22): warning C4838: conversion from 'double' to 'int' requires a narrowing conversion
-C:\Users\thejo\repos\crumble-king\src\enemy.cpp(89,22): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\thejo\repos\crumble-king\src\enemy.cpp(90,19): warning C4838: conversion from 'double' to 'int' requires a narrowing conversion
-C:\Users\thejo\repos\crumble-king\src\enemy.cpp(90,19): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\thejo\repos\crumble-king\src\enemy.cpp(91,19): warning C4838: conversion from 'double' to 'int' requires a narrowing conversion
-C:\Users\thejo\repos\crumble-king\src\enemy.cpp(91,19): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\thejo\repos\crumble-king\src\enemy.cpp(96,22): warning C4838: conversion from 'double' to 'int' requires a narrowing conversion
-C:\Users\thejo\repos\crumble-king\src\enemy.cpp(96,22): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\thejo\repos\crumble-king\src\enemy.cpp(97,22): warning C4838: conversion from 'double' to 'int' requires a narrowing conversion
-C:\Users\thejo\repos\crumble-king\src\enemy.cpp(97,22): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\thejo\repos\crumble-king\src\enemy.cpp(98,18): warning C4838: conversion from 'double' to 'int' requires a narrowing conversion
-C:\Users\thejo\repos\crumble-king\src\enemy.cpp(98,18): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\thejo\repos\crumble-king\src\enemy.cpp(99,18): warning C4838: conversion from 'double' to 'int' requires a narrowing conversion
-C:\Users\thejo\repos\crumble-king\src\enemy.cpp(99,18): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-  game.cpp
   level.cpp
-C:\Users\thejo\repos\crumble-king\src\level.cpp(14,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\thejo\repos\crumble-king\src\level.cpp(52,95): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-  main.cpp
-  menu.cpp
-C:\Users\thejo\repos\crumble-king\src\menu.cpp(10,75): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-  tower.cpp
+C:\Users\thejo\source\crumble-king\src\level.cpp(14,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\thejo\source\crumble-king\src\level.cpp(52,95): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
   Generating Code...
-  crumble-king.vcxproj -> C:\Users\thejo\repos\crumble-king\x64\Debug\crumble-king.exe
+  crumble-king.vcxproj -> C:\Users\thejo\source\crumble-king\x64\Debug\crumble-king.exe

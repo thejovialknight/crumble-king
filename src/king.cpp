@@ -18,8 +18,12 @@ void tick_king(King& king, Platform& platform, Sequences& sequences, Sounds& sou
     king.velocity.y += gravity * king.gravity_scale * delta_time;
 
     // Horizontal movement:
+    double same_direction_mod = 3; // TODO: settings
     double modded_acceleration = acceleration * king.acceleration_mod;
 	if (platform.input.left.held) {
+        if(king.jump_state == JumpState::GROUND && king.velocity.x <= 0) {
+            modded_acceleration *= same_direction_mod;
+        }
         king.animator.is_flipped = true;
 		king.velocity.x -= modded_acceleration * delta_time;
 		if(king.velocity.x < -max_speed) {
@@ -28,9 +32,11 @@ void tick_king(King& king, Platform& platform, Sequences& sequences, Sounds& sou
 	}
 
 	if(platform.input.right.held) {
+        if(king.jump_state == JumpState::GROUND && king.velocity.x >= 0) {
+            modded_acceleration *= same_direction_mod;
+        }
         king.animator.is_flipped = false;
 		king.velocity.x += modded_acceleration * delta_time;
-
 		if(king.velocity.x > max_speed) {
 			king.velocity.x = max_speed;
 		}
