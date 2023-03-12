@@ -28,6 +28,7 @@
     <ClCompile Include="src\high_scores.cpp" />
     <ClCompile Include="src\king.cpp" />
     <ClCompile Include="src\level.cpp" />
+    <ClCompile Include="src\level_editor.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\menu.cpp" />
     <ClCompile Include="src\platform.cpp" />
@@ -52,6 +53,7 @@
     <ClInclude Include="src\hitch.h" />
     <ClInclude Include="src\king.h" />
     <ClInclude Include="src\level.h" />
+    <ClInclude Include="src\level_editor.h" />
     <ClInclude Include="src\menu.h" />
     <ClInclude Include="src\platform.h" />
     <ClInclude Include="src\random.h" />
