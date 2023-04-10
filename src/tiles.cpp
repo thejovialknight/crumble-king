@@ -20,11 +20,49 @@ void tick_tiles(std::vector<Tile>& tiles, double delta_time)
         if(tile.is_crumbling) {
             tile.time_till_crumble -= delta_time;
             if(tile.time_till_crumble <= 0) {
-                tile.health--;
+				tile.health--;
                 tile.is_crumbling = false;
             }
         }
     }
+}
+
+void update_tile_orientation(std::vector<Tile>& tiles) {
+	// TODO: Suboptimal. Probably not worth doing much about, though.
+	for (int i = 0; i < tiles.size(); ++i) {
+		Tile* tile = &tiles[i];
+		if (tile->visible_health <= 0) 
+			continue;
+
+		bool is_tile_left = false;
+		bool is_tile_right = false;
+		Vec2 left_check_pos = Vec2(tile->position.x - 16, tile->position.y);
+		Vec2 right_check_pos = Vec2(tile->position.x + 16, tile->position.y);
+		for (int j = 0; j < tiles.size(); ++j) {
+			Tile* other = &tiles[j];
+			if (i == j || other->visible_health <= 0) { // || other->visible_health < tile->visible_health
+				continue;
+			}
+			if (other->position == left_check_pos) {
+				is_tile_left = true;
+			}
+			if (other->position == right_check_pos) {
+				is_tile_right = true;
+			}
+		}
+
+		if (is_tile_left) {
+			if (is_tile_right) {
+				tile->orientation = TileOrientation::CENTER;
+			} else {
+				tile->orientation = TileOrientation::RIGHT;
+			}
+		} else if (is_tile_right) {
+			tile->orientation = TileOrientation::LEFT;
+		} else {
+ 			tile->orientation = TileOrientation::ISLAND;
+		}
+	}
 }
 
 // TODO: Hash function eventually for speed.

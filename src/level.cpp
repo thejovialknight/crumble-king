@@ -2,8 +2,7 @@
 #include <SDL.h>
 #include "level.h"
 
-Level::Level(LevelData* data, Sequences& sequences, Platform& platform) : data(data)
-{
+Level::Level(LevelData* data, Sequences& sequences, Platform& platform) : data(data) {
     // Initialize state
     food.sequences.push_back(&sequences.food_chicken);
     food.sequences.push_back(&sequences.food_grape);
@@ -12,13 +11,10 @@ Level::Level(LevelData* data, Sequences& sequences, Platform& platform) : data(d
     food.platter_sequence = &sequences.platter;
     food.bubbling_pot_sequence = &sequences.bubbling_pot;
     food.animator.sequence = food.sequences[random_int(food.sequences.size())];
-    tile_sequence = &sequences.tile_center;
-    window_sequence = &sequences.window;
     king.animator.sequence = &sequences.king_idle;
 }
 
-void load_level(Level& level, Sequences& sequences, Sounds& sounds, Platform& platform)
-{
+void load_level(Level& level, Sequences& sequences, Sounds& sounds, Platform& platform) {
     level.tiles.clear();
     level.food.windows.clear();
     level.enemies.clear();
@@ -29,17 +25,22 @@ void load_level(Level& level, Sequences& sequences, Sounds& sounds, Platform& pl
         if (c == 'K') { level.king.position = grid_position_from_index(i); }
         if (c == 'F') { 
             Vec2 p = grid_position_from_index(i);
-            p.y -= 8;
             level.food.windows.emplace_back(Window(p));
         }
         if (c == 'E') { 
             Vec2 p = grid_position_from_index(i);
-            p.y += 8;
+            p.y += 16;
             level.enemies.emplace_back(Enemy(p)); 
         }
-        if (c == '#') { level.tiles.emplace_back(grid_position_from_index(i)); }
+        if (c == '#') { 
+            Vec2 p = grid_position_from_index(i);
+            p.y += 8;
+            level.tiles.emplace_back(Tile(p));
+
+        }
         i++;
     }
+    update_tile_orientation(level.tiles);
     
     level.surface_map = get_surface_map(level.tiles);
     int k = 2;
@@ -69,8 +70,7 @@ void load_level(Level& level, Sequences& sequences, Sounds& sounds, Platform& pl
     stop_music();
 }
 
-void tick_level(Level& level, int atlas, Sequences& sequences, Sounds& sounds, Platform& platform, Settings& settings, double delta_time)
-{
+void tick_level(Level& level, int atlas, Sequences& sequences, Sounds& sounds, Platform& platform, Settings& settings, double delta_time) {
     switch(level.state) {
     case LevelState::PRE:
         tick_pre_level(level, atlas, sequences, sounds, platform, settings, delta_time);
@@ -96,11 +96,10 @@ void tick_level(Level& level, int atlas, Sequences& sequences, Sounds& sounds, P
         level.state = LevelState::QUIT;
     }
 
-    draw_level(level, atlas, platform);
+    draw_level(level, atlas, sequences, platform);
 }
 
-void tick_active_level(Level& level, int atlas, Sequences& sequences, Sounds& sounds, Platform& platform, Settings& settings, double delta_time)
-{
+void tick_active_level(Level& level, int atlas, Sequences& sequences, Sounds& sounds, Platform& platform, Settings& settings, double delta_time) {
     platform.background_color = Vec3(0, 0, 0);
     level.surface_map = get_surface_map(level.tiles);
     HitchInfo hitch(false, 0);
@@ -128,10 +127,8 @@ void tick_active_level(Level& level, int atlas, Sequences& sequences, Sounds& so
     }
 }
 
-void tick_pre_level(Level& level, int atlas, Sequences& sequences, Sounds& sounds, Platform& platform, Settings& settings, double delta_time)
-{
-    level.time_to_next_state -= delta_time;
-    if(level.time_to_next_state <= 0 || platform.input.jump.just_pressed) {
+void tick_pre_level(Level& level, int atlas, Sequences& sequences, Sounds& sounds, Platform& platform, Settings& settings, double delta_time) {
+    if(platform.input.jump.just_pressed) {
         set_music(platform, music_from_level_name(level.data->name, sounds), 1);
         level.state = LevelState::ACTIVE;
     }
@@ -141,8 +138,7 @@ void tick_pre_level(Level& level, int atlas, Sequences& sequences, Sounds& sound
     }
 }
 
-void tick_post_level(Level& level, int atlas, Sequences& sequences, Platform& platform, Settings& settings, double delta_time)
-{
+void tick_post_level(Level& level, int atlas, Sequences& sequences, Platform& platform, Settings& settings, double delta_time) {
     for (Enemy& enemy : level.enemies) {
         enemy.animator.sequence = &sequences.guard_end;
         enemy.animator.frame_length = 0.4;
@@ -162,15 +158,14 @@ void tick_hitch_level(Level& level, Settings& settings, double delta_time) {
     if(level.time_to_next_state <= 0) level.state = LevelState::ACTIVE;
 }
 
-void draw_level(Level& level, int atlas, Platform& platform)
-{
+void draw_level(Level& level, int atlas, Sequences& sequences, Platform& platform) {
     // Draw windows
     for(const Window& window : level.food.windows) {
         int frame = 0;
         if(!window.is_active) { frame = 1; }
         put_sprite(platform, sprite_from_sequence(
             atlas,
-            *level.window_sequence,
+            sequences.window,
             frame,
             window.spawn_position,
             false
@@ -184,17 +179,33 @@ void draw_level(Level& level, int atlas, Platform& platform)
             level.food.position
         ));
     }
+
     // Draw tiles
     for (const Tile& tile : level.tiles) {
-        int visible_health = tile.health;
+        if (tile.visible_health <= 0) continue;
 
-        if (tile.is_crumbling) { visible_health--; }
-        if (visible_health <= 0) { continue; }
+        Sequence* tile_sequence = &sequences.king_run;
+        switch(tile.orientation) {
+        case TileOrientation::LEFT :
+            tile_sequence = &sequences.tile_left;
+            break;
+        case TileOrientation::RIGHT :
+            tile_sequence = &sequences.tile_right;
+            break;
+        case TileOrientation::CENTER:
+            tile_sequence = &sequences.tile_center;
+            break;
+        case TileOrientation::ISLAND :
+            tile_sequence = &sequences.tile_island;
+            break;
+        default :
+            break;
+        }
 
         put_sprite(platform, sprite_from_sequence(
             atlas,
-            *level.tile_sequence,
-            visible_health,
+            *tile_sequence,
+            tile.visible_health,
             tile.position,
             false // is_flipped could be randomized? Hmm, probably not.
         ));

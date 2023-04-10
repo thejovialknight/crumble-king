@@ -61,7 +61,10 @@ struct PlatformText {
     Vec3 color;
 
     PlatformText(std::string text, double font_size, int x, int y, Vec3 color) :
-        text(text), font_size(font_size), x(x), y(y), color(color) {}
+        text(text), font_size(font_size), x(x), y(y), color(color) 
+    {
+    
+    }
 };
 
 struct Platform {

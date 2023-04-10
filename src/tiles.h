@@ -8,12 +8,21 @@
 #define COLUMNS 40
 #define ROWS 23
 
+enum TileOrientation {
+	LEFT,
+	CENTER,
+	RIGHT,
+	ISLAND
+};
+
 struct Tile {
 	int health = 3;
 	Vec2 position;
 	bool is_crumbling = false;
+	int visible_health = 3;
 	double time_till_crumble = 0;
 	Rect collider = Rect(-8, -8, 16, 16);
+	TileOrientation orientation = TileOrientation::RIGHT;
 
 	Tile(Vec2 position) : position(position) {}
 
@@ -31,6 +40,6 @@ struct SurfaceMap {
 };
 
 Vec2 grid_position_from_index(int i);
-void put_tile(bool tiles[], int x, int y);
 void tick_tiles(std::vector<Tile>& tiles, double delta_time);
+void update_tile_orientation(std::vector<Tile>& tiles);
 SurfaceMap get_surface_map(std::vector<Tile>& tiles);

@@ -26,7 +26,7 @@ struct King {
     bool is_grounded = false;
     bool is_facing_right = true;
     Animator animator;
-    Rect collider = Rect(-4, -16, 12, 16);
+    Rect collider = Rect(-6, -16, 14, 16);
 };
 
 void tick_king(King& king, Platform& platform, Sequences& sequences, Sounds& sounds, const Settings& settings, double delta_time);

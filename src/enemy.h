@@ -12,7 +12,8 @@ enum class EnemyState {
 	PATROL,
 	CHASE,
 	PAUSE,
-	LOST
+	LOST,
+	SEENFREEZE
 };
 
 struct Enemy {
@@ -34,3 +35,4 @@ void tick_enemies(std::vector<Enemy>& enemies, King& king, std::vector<Tile>& ti
 bool is_king_caught(std::vector<Enemy>& enemies, King& king);
 // Returns -1 if not on platform. TODO: Maybe PlatformHandle with bool?
 Surface* surface_from_entity_position(Vec2& position, std::vector<Tile>& tiles, SurfaceMap& surface_map);
+double get_stored_x_direction(Enemy& enemy);

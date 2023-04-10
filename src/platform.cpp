@@ -2,8 +2,8 @@
 
 void init_platform(Platform& platform)
 {
-    platform.actual_width = 1280;
-    platform.actual_height = 720;
+    platform.actual_width = 2560;
+    platform.actual_height = 1440;
     platform.logical_width = 640;
     platform.logical_height = 360;
 
@@ -11,7 +11,7 @@ void init_platform(Platform& platform)
     IMG_Init(IMG_INIT_PNG);
     TTF_Init();
     Mix_OpenAudio(96000, AUDIO_S16SYS, 1, 4096);
-    platform.window = SDL_CreateWindow("Crumble King", 20, 20, platform.actual_width, platform.actual_height, SDL_WINDOW_SHOWN);
+    platform.window = SDL_CreateWindow("Crumble King", 0, 0, platform.actual_width, platform.actual_height, SDL_WINDOW_BORDERLESS);
     platform.renderer = SDL_CreateRenderer(platform.window, -1, SDL_RENDERER_ACCELERATED);
     platform.font = TTF_OpenFont("resources/fonts/Glory-Regular.ttf", 32);
     platform.ticks_count = 0;
@@ -39,7 +39,7 @@ void update_platform(Platform& platform)
     SDL_RenderClear(platform.renderer);
     
     // SPRITES
-    platform.pixel_scalar = platform.actual_height / platform.logical_height;
+    platform.pixel_scalar = (double)platform.actual_height / platform.logical_height;
     for (PlatformSprite& sprite : platform.sprites) {
         SDL_Rect source;
         source.x = sprite.source.position.x;
@@ -69,9 +69,8 @@ void update_platform(Platform& platform)
     }
     platform.sprites.clear();
 
-    // TEXT
     for (PlatformText& text : platform.texts) {
-        SDL_Color color = SDL_Color{ (uint8_t)(text.color.r * 255), (uint8_t)(text.color.g), (uint8_t)(text.color.b), SDL_ALPHA_OPAQUE };
+        SDL_Color color = SDL_Color{ (uint8_t)(text.color.r * 255), (uint8_t)(text.color.g * 255), (uint8_t)(text.color.b * 255), SDL_ALPHA_OPAQUE };
         SDL_Surface* surface = TTF_RenderText_Solid(platform.font, text.text.c_str(), color);
         if (surface == NULL) {
             std::cout << "Unable to render text surface!" << std::endl;
@@ -89,6 +88,7 @@ void update_platform(Platform& platform)
         SDL_FreeSurface(surface);
         SDL_Rect destination = { text.x, text.y, w, h };
         SDL_RenderCopy(platform.renderer, texture, NULL, &destination);
+        SDL_DestroyTexture(texture);
     }
     platform.texts.clear();
 
@@ -114,8 +114,9 @@ void update_platform(Platform& platform)
         case SDL_KEYDOWN:
             for(PlatformButton* btn : platform.buttons) {
                 if(e.key.keysym.scancode == btn->keycode) {
-                    if(!btn->held) 
+                    if (!e.key.repeat) {
                         btn->just_pressed = true;
+                    }
                     btn->held = true;
                 }
             }
@@ -126,7 +127,6 @@ void update_platform(Platform& platform)
                     if(btn->held) 
                         btn->released = true;
                     btn->held = false;
-                    btn->just_pressed = false;
                 }
             }
             break;

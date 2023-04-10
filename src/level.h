@@ -41,8 +41,6 @@ struct Level {
 
     // Data
     LevelData* data;
-    Sequence* tile_sequence;
-    Sequence* window_sequence;
 
     Level(LevelData* data, Sequences& sequences, Platform& platform);
 };
@@ -53,5 +51,5 @@ void tick_pre_level(Level& level, int atlas, Sequences& sequences, Sounds& sound
 void tick_active_level(Level& level, int atlas, Sequences& sequences, Sounds& sounds, Platform& platform, Settings& settings, double delta_time);
 void tick_post_level(Level& level, int atlas, Sequences& sequences, Platform& platform, Settings& settings, double delta_time);
 void tick_hitch_level(Level& level, Settings& settings, double delta_time);
-void draw_level(Level& level, int atlas, Platform& platform);
+void draw_level(Level& level, int atlas, Sequences& sequences, Platform& platform);
 int music_from_level_name(std::string& name, Sounds& sounds);

@@ -86,7 +86,7 @@ void tick_food(int& out_score, Food& food, King& king, Sounds& sounds, Platform&
 			out_hitch = HitchInfo(true, 0.33); // SETTINGS!!
 			buffer_sound(platform, sounds.food_pickup, 1);
 			hide_food(food, inactive_length);
-			king.acceleration_mod *= 0.75;
+			king.acceleration_mod *= 0.75; // SETTINGS!
 			food.windows[food.current_window].is_active = false;
 
 			bool some_window_is_active = false;
@@ -112,13 +112,13 @@ void tick_food(int& out_score, Food& food, King& king, Sounds& sounds, Platform&
 			buffer_sound(platform, sounds.food_cooked, 1);
 			food.animator.sequence = food.sequences[random_int(food.sequences.size())];
 		} else {
-			bool king_falling = king.velocity.y > 0;
-			bool king_x_target = king.position.x < food.position.x + 16
+			bool king_falling = king.velocity.y > 0 && !king.is_grounded;
+			bool king_within_x = king.position.x < food.position.x + 16
 				&& king.position.x > food.position.x - 16;
-			bool king_y_target = king.position.y < food.position.y + 8
+			bool king_within_y = king.position.y < food.position.y + 8
 				&& king.position.y > food.position.y - 8;
 
-			if(king_falling && king_x_target && king_y_target) {
+			if(king_falling && king_within_x && king_within_y) {
 				out_score += end_points;
 				buffer_sound(platform, sounds.king_float, 1);
 				food.level_complete = true;

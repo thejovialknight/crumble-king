@@ -79,6 +79,7 @@ void tick_game(Game& game, Platform& platform, double delta_time)
             game.tower->level_index = level_index_to_load; // CAREFUL! IN THE FUTURE THIS INDEX WON'T HAVE ANY CORRESPONDENCE TO THE TOWER INDEX
             game.tower->lives_remaining = 3;
             load_level(game.tower->level, game.sequences, game.sounds, platform);
+            game.settings = load_settings(get_file_text("resources/config/config.txt")); // TODO: JUST FOR DEBUG
         }
         platform.background_color = Vec3(0, 0, 0);
         break;

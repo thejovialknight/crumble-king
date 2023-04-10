@@ -18,7 +18,7 @@ void tick_king(King& king, Platform& platform, Sequences& sequences, Sounds& sou
     king.velocity.y += gravity * king.gravity_scale * delta_time;
 
     // Horizontal movement:
-    double same_direction_mod = 3; // TODO: settings
+    double same_direction_mod = 1; // TODO: settings
     double modded_acceleration = acceleration * king.acceleration_mod;
 	if (platform.input.left.held) {
         if(king.jump_state == JumpState::GROUND && king.velocity.x <= 0) {
@@ -146,8 +146,8 @@ void resolve_king_velocity(King& king, std::vector<Tile>& tiles, Sounds& sounds,
 {
 	Rect king_col = offset_collider(king.collider, king.position);
 	king.is_grounded = false;
-
-	// Loop through collision checks
+    
+    bool is_tiles_changed = false;
 	for(Tile& tile : tiles) {
 		if (tile.health <= 0){
 			continue;
@@ -165,9 +165,10 @@ void resolve_king_velocity(King& king, std::vector<Tile>& tiles, Sounds& sounds,
 		if(is_colliding(king_post_y_vel, tile_col)) {
 			if (king.velocity.y > 0 && !tile.is_crumbling) {
 				tile.is_crumbling = true;
-				// TODO: Settings for crumble length
-				tile.time_till_crumble = 0.5;
-				buffer_sound(platform, sounds.tile_crumbles[random_int(sounds.tile_crumbles.size())], 1);
+				tile.time_till_crumble = 0.5; // TODO: Settings for crumble length
+                tile.visible_health--;
+                buffer_sound(platform, sounds.tile_crumbles[random_int(sounds.tile_crumbles.size())], 1);
+                is_tiles_changed = true;
 			}
 			king.velocity.y = 0;
 		}
@@ -181,5 +182,9 @@ void resolve_king_velocity(King& king, std::vector<Tile>& tiles, Sounds& sounds,
 
 	king.position.x += king.velocity.x * delta_time;
 	king.position.y += king.velocity.y * delta_time;
+
+    if (is_tiles_changed) {
+        update_tile_orientation(tiles);
+    }
 }
 

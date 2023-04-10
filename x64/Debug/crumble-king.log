@@ -1,6 +1,12 @@
-﻿  enemy.cpp
-  level.cpp
-C:\Users\thejo\source\crumble-king\src\level.cpp(14,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\thejo\source\crumble-king\src\level.cpp(52,95): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-  Generating Code...
+﻿  platform.cpp
+C:\Users\thejo\source\crumble-king\src\platform.cpp(36,34): warning C4244: 'argument': conversion from 'double' to 'Uint8', possible loss of data
+C:\Users\thejo\source\crumble-king\src\platform.cpp(35,34): warning C4244: 'argument': conversion from 'double' to 'Uint8', possible loss of data
+C:\Users\thejo\source\crumble-king\src\platform.cpp(34,34): warning C4244: 'argument': conversion from 'double' to 'Uint8', possible loss of data
+C:\Users\thejo\source\crumble-king\src\platform.cpp(51,54): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\thejo\source\crumble-king\src\platform.cpp(52,54): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\thejo\source\crumble-king\src\platform.cpp(53,46): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\thejo\source\crumble-king\src\platform.cpp(54,46): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\thejo\source\crumble-king\src\platform.cpp(180,46): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\thejo\source\crumble-king\src\platform.cpp(192,44): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\thejo\source\crumble-king\src\platform.cpp(204,44): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
   crumble-king.vcxproj -> C:\Users\thejo\source\crumble-king\x64\Debug\crumble-king.exe
