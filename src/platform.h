@@ -12,6 +12,7 @@
 #include "settings.h"
 #include "rect.h"
 #include "random.h"
+#include <unordered_map>
 
 struct PlatformButton {
     int keycode;
@@ -22,7 +23,6 @@ struct PlatformButton {
     PlatformButton(int keycode) : keycode(keycode) {}
 };
 
-// TODO: Too specific for a platform layer. Figure something out.
 struct PlatformInput {
     PlatformButton left = PlatformButton(SDL_SCANCODE_A);
     PlatformButton right = PlatformButton(SDL_SCANCODE_D);
@@ -41,8 +41,9 @@ struct PlatformSprite {
     double origin_x;
     double origin_y;
     bool is_flipped;
+    Vec3 color;
 
-    PlatformSprite(int atlas, IRect source, int x, int y, int origin_x, int origin_y, bool is_flipped) : atlas(atlas), source(source), x(x), y(y), origin_x(origin_x), origin_y(origin_y), is_flipped(is_flipped) {}
+    PlatformSprite(int atlas, IRect source, int x, int y, int origin_x, int origin_y, bool is_flipped, Vec3 color) : atlas(atlas), source(source), x(x), y(y), origin_x(origin_x), origin_y(origin_y), is_flipped(is_flipped), color(color) {}
 };
 
 struct PlatformSound {
@@ -55,16 +56,66 @@ struct PlatformSound {
 // TODO: Refactor for pixel art text with atlas
 struct PlatformText {
     std::string text;
-    double font_size;
+    int font;
     int x;
     int y;
     Vec3 color;
 
-    PlatformText(std::string text, double font_size, int x, int y, Vec3 color) :
-        text(text), font_size(font_size), x(x), y(y), color(color) 
-    {
-    
-    }
+    PlatformText(std::string text, int font, int x, int y, Vec3 color) :
+        text(text), font(font), x(x), y(y), color(color) {}
+};
+
+struct PlatformFont {
+    int atlas;
+    std::unordered_map<char, int> chars = {
+        {'A', 0},
+        {'B', 1},
+        {'C', 2},
+        {'D', 3},
+        {'E', 4},
+        {'F', 5},
+        {'G', 6},
+        {'H', 7},
+        {'I', 8},
+        {'J', 9},
+        {'K', 10},
+        {'L', 11},
+        {'M', 12},
+        {'N', 13},
+        {'O', 14},
+        {'P', 15},
+        {'Q', 16},
+        {'R', 17},
+        {'S', 18},
+        {'T', 19},
+        {'U', 20},
+        {'V', 21},
+        {'W', 22},
+        {'X', 23},
+        {'Y', 24},
+        {'Z', 25},
+        {'0', 26},
+        {'1', 27},
+        {'2', 28},
+        {'3', 29},
+        {'4', 30},
+        {'5', 31},
+        {'6', 32},
+        {'7', 33},
+        {'8', 34},
+        {'9', 35},
+        {'-', 36},
+        {'*', 37},
+        {'!', 38},
+        {'©', 39},
+        {'.', 40},
+        {':', 41},
+        {' ', 42}
+    };
+    int width = 8;
+    int height = 8;
+
+    PlatformFont(int atlas) : atlas(atlas) {}
 };
 
 struct Platform {
@@ -84,6 +135,7 @@ struct Platform {
     std::vector<Mix_Music*> music_assets;
     std::vector<PlatformSprite> sprites;
     std::vector<PlatformSound> sounds;
+    std::vector<PlatformFont> fonts;
     std::vector<PlatformText> texts;
     std::vector<PlatformButton*> buttons;
     Vec3 background_color = Vec3(0, 0, 0);
@@ -100,6 +152,9 @@ void write_file_text(const char* text, const char* fname);
 // Sprite handling
 int new_texture_handle(Platform& platform, const char* fname);
 void put_sprite(Platform& platform, PlatformSprite sprite);
+
+// Font handling
+int new_font_handle(Platform& platform, int texture);
 
 // Sound handling
 int new_sound_handle(Platform& platform, const char* fname);

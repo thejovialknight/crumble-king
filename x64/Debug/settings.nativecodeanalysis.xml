@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DEFECTS>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\thejo\Documents\GitHub\crumble-king\src\</FILEPATH>
+      <FILENAME>settings.cpp</FILENAME>
+      <LINE>50</LINE>
+      <COLUMN>8</COLUMN>
+    </SFA>
+    <DEFECTCODE>6001</DEFECTCODE>
+    <DESCRIPTION>Using uninitialized memory 'settings'.</DESCRIPTION>
+    <FUNCTION>load_settings</FUNCTION>
+    <DECORATED>?load_settings@@YA?AUSettings@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z</DECORATED>
+    <FUNCLINE>4</FUNCLINE>
+    <PROBABILITY>1</PROBABILITY>
+    <RANK>3</RANK>
+    <CATEGORY>
+      <RULECATEGORY>mspft</RULECATEGORY>
+    </CATEGORY>
+    <PATH>
+      <SFA>
+        <FILEPATH>C:\Users\thejo\Documents\GitHub\crumble-king\src\</FILEPATH>
+        <FILENAME>settings.cpp</FILENAME>
+        <LINE>6</LINE>
+        <COLUMN>10</COLUMN>
+        <KEYEVENT>
+          <ID>1</ID>
+          <KIND>declaration</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>'settings' is not initialized</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\thejo\Documents\GitHub\crumble-king\src\</FILEPATH>
+        <FILENAME>settings.cpp</FILENAME>
+        <LINE>8</LINE>
+        <COLUMN>9</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\thejo\Documents\GitHub\crumble-king\src\</FILEPATH>
+        <FILENAME>settings.cpp</FILENAME>
+        <LINE>8</LINE>
+        <COLUMN>18</COLUMN>
+        <KEYEVENT>
+          <ID>2</ID>
+          <KIND>branch</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>Skip this loop, (assume 'i&lt;text.length()' is false)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\thejo\Documents\GitHub\crumble-king\src\</FILEPATH>
+        <FILENAME>settings.cpp</FILENAME>
+        <LINE>50</LINE>
+        <COLUMN>1</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\thejo\Documents\GitHub\crumble-king\src\</FILEPATH>
+        <FILENAME>settings.cpp</FILENAME>
+        <LINE>50</LINE>
+        <COLUMN>8</COLUMN>
+        <KEYEVENT>
+          <ID>3</ID>
+          <KIND>usage</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>'settings' is used, but may not have been initialized</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+    </PATH>
+  </DEFECT>
+</DEFECTS>

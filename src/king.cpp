@@ -13,6 +13,8 @@ void tick_king(King& king, Platform& platform, Sequences& sequences, Sounds& sou
     const double float_gravity_lerp_speed = settings.float_gravity_lerp_speed;
     const double fall_gravity_scale = settings.fall_gravity_scale;
     const double gravity = settings.gravity;
+    const double post_float_gravity_lerp_speed = 6; // TODO: SETTINGS!
+    const double post_float_gravity_epsilon_threshold = 1; // TODO: SETTINGS!
 
     // Gravity
     king.velocity.y += gravity * king.gravity_scale * delta_time;
@@ -116,7 +118,14 @@ void tick_king(King& king, Platform& platform, Sequences& sequences, Sounds& sou
 
         if(platform.input.jump.just_pressed) {
             king.jump_buffer = jump_buffer_length;
+        } 
+        
+        if (platform.input.jump.released) {
+            king.jump_state = JumpState::POST_FLOAT;
         }
+    }
+    else if (king.jump_state == JumpState::POST_FLOAT) {
+        king.gravity_scale = lerp(king.gravity_scale, fall_gravity_scale, post_float_gravity_lerp_speed * delta_time);
     }
 
     // Set king sprite
@@ -129,6 +138,13 @@ void tick_king(King& king, Platform& platform, Sequences& sequences, Sounds& sou
         king.animator.sequence = &sequences.king_jump; 
         if (king.jump_state == JumpState::FLOAT) {
             king.animator.sequence = &sequences.king_float;
+        }
+        if (king.jump_state == JumpState::POST_FLOAT) {
+            if (epsilon_equals(king.gravity_scale, fall_gravity_scale, post_float_gravity_epsilon_threshold)) {
+                king.animator.sequence = &sequences.king_jump;
+            } else {
+                king.animator.sequence = &sequences.king_float;
+            }
         }
     }
     tick_animator(king.animator, delta_time);

@@ -6,9 +6,9 @@ void tick_tower(Tower& tower, int atlas, Sequences& sequences, Sounds& sounds, S
 
     platform.texts.emplace_back(PlatformText(
         "Lives: " + std::to_string(tower.lives_remaining),
-        64,
-        600,
-        100,
+        0,
+        128,
+        32,
         Vec3(0.9, 0.2, 0.2)
     ));
 
@@ -42,4 +42,3 @@ void tick_tower(Tower& tower, int atlas, Sequences& sequences, Sounds& sounds, S
         }
     }
 }
-

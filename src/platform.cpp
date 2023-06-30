@@ -2,8 +2,8 @@
 
 void init_platform(Platform& platform)
 {
-    platform.actual_width = 2560;
-    platform.actual_height = 1440;
+    platform.actual_width = 1920;
+    platform.actual_height = 1080;
     platform.logical_width = 640;
     platform.logical_height = 360;
 
@@ -37,6 +37,22 @@ void update_platform(Platform& platform)
         SDL_ALPHA_OPAQUE
     );
     SDL_RenderClear(platform.renderer);
+
+    // TEXT
+    for (PlatformText& text : platform.texts) {
+        for (int i = 0; i < text.text.size(); ++i) {
+            char& c = text.text[i];
+            PlatformFont& font = platform.fonts[text.font];
+            int i_x = font.chars[std::toupper(c)];
+             put_sprite(platform, PlatformSprite(
+                font.atlas, 
+                IRect(/*font.chars[c] * font.width*/ font.chars[std::toupper(c)] * 8, 0, font.width, font.height),
+                text.x + (i * font.width), text.y, 0, 0, false, text.color
+            ));
+            int k = 2;
+        }
+    }
+    platform.texts.clear();
     
     // SPRITES
     platform.pixel_scalar = (double)platform.actual_height / platform.logical_height;
@@ -58,6 +74,7 @@ void update_platform(Platform& platform)
             flip = SDL_FLIP_HORIZONTAL;
         }
 
+        SDL_SetTextureColorMod(platform.texture_assets[sprite.atlas], sprite.color.r * 255, sprite.color.g * 255, sprite.color.b * 255);
         SDL_RenderCopyEx(platform.renderer, 
             platform.texture_assets[sprite.atlas], 
             &source, 
@@ -69,29 +86,6 @@ void update_platform(Platform& platform)
     }
     platform.sprites.clear();
 
-    for (PlatformText& text : platform.texts) {
-        SDL_Color color = SDL_Color{ (uint8_t)(text.color.r * 255), (uint8_t)(text.color.g * 255), (uint8_t)(text.color.b * 255), SDL_ALPHA_OPAQUE };
-        SDL_Surface* surface = TTF_RenderText_Solid(platform.font, text.text.c_str(), color);
-        if (surface == NULL) {
-            std::cout << "Unable to render text surface!" << std::endl;
-            break;
-        }
-
-        SDL_Texture* texture = SDL_CreateTextureFromSurface(platform.renderer, surface);
-        if (texture == NULL) {
-            std::cout << "Unable to create texture from rendered text!" << std::endl;
-            break;
-        }
-
-        int w = surface->w;
-        int h = surface->h;
-        SDL_FreeSurface(surface);
-        SDL_Rect destination = { text.x, text.y, w, h };
-        SDL_RenderCopy(platform.renderer, texture, NULL, &destination);
-        SDL_DestroyTexture(texture);
-    }
-    platform.texts.clear();
-
     SDL_RenderPresent(platform.renderer);
 
     // SOUNDS
@@ -100,9 +94,10 @@ void update_platform(Platform& platform)
     }
     platform.sounds.clear();
 
-    // INPUT (NEXT FRAME)
+    // INPUT
     for (PlatformButton* button : platform.buttons) {
         button->just_pressed = false;
+        button->released = false;
     }
 
     SDL_Event e;
@@ -180,6 +175,11 @@ int new_texture_handle(Platform& platform, const char* fname)
     return platform.texture_assets.size() - 1;
 }
 
+int new_font_handle(Platform& platform, int atlas) {
+    platform.fonts.emplace_back(PlatformFont(atlas));
+    return platform.fonts.size() - 1;
+}
+
 int new_sound_handle(Platform& platform, const char* fname)
 {
     Mix_Chunk* snd = Mix_LoadWAV(fname);
@@ -211,12 +211,12 @@ void put_sprite(Platform& platform, PlatformSprite sprite)
 
 void buffer_sound(Platform& platform, int handle, double volume)
 {
-    platform.sounds.push_back(PlatformSound(handle, volume));
+    //platform.sounds.push_back(PlatformSound(handle, volume));
 }
 
 void set_music(Platform & platform, int handle, double volume)
 {
-    Mix_PlayMusic(platform.music_assets[handle], -1);
+    //Mix_PlayMusic(platform.music_assets[handle], -1);
 }
 
 void stop_music() {

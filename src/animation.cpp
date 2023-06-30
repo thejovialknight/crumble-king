@@ -29,7 +29,8 @@ PlatformSprite sprite_from_animator(int atlas, Animator& animator, const Vec2& p
 			0,
 			0,
 			0,
-			false
+			false,
+			Vec3(1, 1, 1)
 		);
 	}
 	return sprite_from_sequence(atlas, *animator.sequence, animator.frame, position, animator.is_flipped);
@@ -49,7 +50,8 @@ PlatformSprite sprite_from_sequence(int atlas, const Sequence& sequence, int fra
 		(int)position.y,
 		(int)sequence.origin.x,
 		(int)sequence.origin.y,
-		is_flipped
+		is_flipped,
+		Vec3(1, 1, 1)
 	);
 }
 

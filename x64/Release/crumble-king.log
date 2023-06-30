@@ -1,0 +1,45 @@
+﻿  animation.cpp
+C:\Users\thejo\Documents\GitHub\crumble-king\src\animation.cpp(64,13): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\thejo\Documents\GitHub\crumble-king\src\animation.cpp(65,14): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  collision.cpp
+  emote.cpp
+  enemy.cpp
+  food.cpp
+C:\Users\thejo\Documents\GitHub\crumble-king\src\food.cpp(50,58): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\thejo\Documents\GitHub\crumble-king\src\food.cpp(64,76): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\thejo\Documents\GitHub\crumble-king\src\food.cpp(113,76): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  game.cpp
+  high_scores.cpp
+  king.cpp
+C:\Users\thejo\Documents\GitHub\crumble-king\src\king.cpp(170,99): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  level.cpp
+C:\Users\thejo\Documents\GitHub\crumble-king\src\level.cpp(13,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\thejo\Documents\GitHub\crumble-king\src\level.cpp(53,95): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  level_editor.cpp
+  main.cpp
+  menu.cpp
+C:\Users\thejo\Documents\GitHub\crumble-king\src\menu.cpp(10,75): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  platform.cpp
+C:\Users\thejo\Documents\GitHub\crumble-king\src\platform.cpp(36,34): warning C4244: 'argument': conversion from 'double' to 'Uint8', possible loss of data
+C:\Users\thejo\Documents\GitHub\crumble-king\src\platform.cpp(35,34): warning C4244: 'argument': conversion from 'double' to 'Uint8', possible loss of data
+C:\Users\thejo\Documents\GitHub\crumble-king\src\platform.cpp(34,34): warning C4244: 'argument': conversion from 'double' to 'Uint8', possible loss of data
+C:\Users\thejo\Documents\GitHub\crumble-king\src\platform.cpp(51,54): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\thejo\Documents\GitHub\crumble-king\src\platform.cpp(52,54): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\thejo\Documents\GitHub\crumble-king\src\platform.cpp(53,46): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\thejo\Documents\GitHub\crumble-king\src\platform.cpp(54,46): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\thejo\Documents\GitHub\crumble-king\src\platform.cpp(145,9): error C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\thejo\Documents\GitHub\crumble-king\src\platform.cpp(167,9): error C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\thejo\Documents\GitHub\crumble-king\src\platform.cpp(180,46): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\thejo\Documents\GitHub\crumble-king\src\platform.cpp(192,44): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\thejo\Documents\GitHub\crumble-king\src\platform.cpp(204,44): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  random.cpp
+C:\Users\thejo\Documents\GitHub\crumble-king\src\random.cpp(5,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  settings.cpp
+  sound.cpp
+  text_parsing.cpp
+  tiles.cpp
+C:\Users\thejo\Documents\GitHub\crumble-king\src\tiles.cpp(90,42): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  tower.cpp
+  utils.cpp
+  Compiling...
+  vec2.cpp

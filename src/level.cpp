@@ -238,9 +238,9 @@ void draw_level(Level& level, int atlas, Sequences& sequences, Platform& platfor
     // Draw points
     platform.texts.emplace_back(PlatformText(
         "Points: " + std::to_string(level.score),
-        64,
-        100,
-        100,
+        0,
+        32,
+        32,
         Vec3(0.9, 0.2, 0.2)
     ));
 

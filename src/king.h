@@ -12,7 +12,8 @@
 enum class JumpState {
     GROUND,
     JUMP,
-    FLOAT
+    FLOAT,
+    POST_FLOAT
 };
 
 struct King {

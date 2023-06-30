@@ -15,6 +15,8 @@ void init_game(Game& game, Platform& platform)
     }
 
     game.atlas = new_texture_handle(platform, "resources/sprites/sprite_atlas.png");
+    game.font = new_font_handle(platform, new_texture_handle(platform, "resources/sprites/font_atlas.png"));
+
     std::string level_str = get_file_text("resources/levels/levels.txt");
     LevelData level_data;
     int start = 0;
@@ -118,6 +120,5 @@ void reset_data(Game& game, Platform& platform)
 {
     game.high_scores.clear();
     write_high_scores(game.high_scores, platform);
-    //SaveFileText("resources/save/scores.txt", "0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n");
     std::string data = "-1\n";
 }

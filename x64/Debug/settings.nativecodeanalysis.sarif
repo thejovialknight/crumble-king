@@ -1,0 +1,171 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [
+        {
+          "ruleId": "C6001",
+          "message": {
+            "text": "Using uninitialized memory 'settings'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/thejo/Documents/GitHub/crumble-king/src/settings.cpp"
+                },
+                "region": {
+                  "startLine": 50,
+                  "startColumn": 9,
+                  "endLine": 50,
+                  "endColumn": 9
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "load_settings",
+                  "decoratedName": "?load_settings@@YA?AUSettings@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/thejo/Documents/GitHub/crumble-king/src/settings.cpp"
+                          },
+                          "region": {
+                            "startLine": 6,
+                            "startColumn": 11
+                          }
+                        },
+                        "message": {
+                          "text": "'settings' is not initialized"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/thejo/Documents/GitHub/crumble-king/src/settings.cpp"
+                          },
+                          "region": {
+                            "startLine": 8,
+                            "startColumn": 10
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/thejo/Documents/GitHub/crumble-king/src/settings.cpp"
+                          },
+                          "region": {
+                            "startLine": 8,
+                            "startColumn": 19
+                          }
+                        },
+                        "message": {
+                          "text": "Skip this loop, (assume 'i<text.length()' is false)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/thejo/Documents/GitHub/crumble-king/src/settings.cpp"
+                          },
+                          "region": {
+                            "startLine": 50,
+                            "startColumn": 2
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/thejo/Documents/GitHub/crumble-king/src/settings.cpp"
+                          },
+                          "region": {
+                            "startLine": 50,
+                            "startColumn": 9
+                          }
+                        },
+                        "message": {
+                          "text": "'settings' is used, but may not have been initialized"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.35.32217.1",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///C:/Users/thejo/Documents/GitHub/crumble-king/src/settings.cpp"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "de1e90cc283fa0422588af13de6cc6e69a6431e291082bbdd57002bb45791ee1"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/thejo/documents/github/crumble-king/src/settings.h"
+          },
+          "hashes": {
+            "sha-256": "c263ca155305454b60849f8ade4cff21763cb667abd19037244233f9d8a5aaff"
+          }
+        }
+      ]
+    }
+  ]
+}

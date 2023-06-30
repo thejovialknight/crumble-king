@@ -25,9 +25,9 @@ void tick_menu_list(MenuList& list, Sounds& sounds, Platform& platform)
         if(i == list.selection) { color = Vec3(0.9, 0.2, 0.2); };
         platform.texts.emplace_back(PlatformText(
             list.buttons[i].text, 
-            64,
-            100,
-            100 + (i * 64),
+            0,
+            32,
+            64 + (i * 16),
             color
         ));
     }

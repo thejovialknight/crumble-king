@@ -23,6 +23,7 @@ struct Game {
     Sequences sequences;
     Sounds sounds;
     int atlas; // Texture index
+    int font; // Font index
 	std::vector<LevelData> levels;
     std::vector<TowerData> towers;
     std::vector<int> high_scores;

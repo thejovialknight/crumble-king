@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DEFECTS>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\thejo\Documents\GitHub\crumble-king\src\</FILEPATH>
+      <FILENAME>emote.h</FILENAME>
+      <LINE>8</LINE>
+      <COLUMN>0</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Emote::time_to_disappear' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Emote::{ctor}</FUNCTION>
+    <DECORATED>??0Emote@@QEAA@XZ</DECORATED>
+    <FUNCLINE>8</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Emote::time_to_disappear</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\thejo\Documents\GitHub\crumble-king\src\</FILEPATH>
+      <FILENAME>level.cpp</FILENAME>
+      <LINE>5</LINE>
+      <COLUMN>7</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Level::time_to_next_state' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Level::{ctor}</FUNCTION>
+    <DECORATED>??0Level@@QEAA@PEAULevelData@@AEAUSequences@@AEAUPlatform@@@Z</DECORATED>
+    <FUNCLINE>5</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Level::time_to_next_state</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\thejo\Documents\GitHub\crumble-king\src\</FILEPATH>
+      <FILENAME>food.h</FILENAME>
+      <LINE>35</LINE>
+      <COLUMN>0</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Food::platter_sequence' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Food::{ctor}</FUNCTION>
+    <DECORATED>??0Food@@QEAA@XZ</DECORATED>
+    <FUNCLINE>35</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Food::platter_sequence</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\thejo\Documents\GitHub\crumble-king\src\</FILEPATH>
+      <FILENAME>food.h</FILENAME>
+      <LINE>35</LINE>
+      <COLUMN>0</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Food::bubbling_pot_sequence' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Food::{ctor}</FUNCTION>
+    <DECORATED>??0Food@@QEAA@XZ</DECORATED>
+    <FUNCLINE>35</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Food::bubbling_pot_sequence</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\thejo\Documents\GitHub\crumble-king\src\</FILEPATH>
+      <FILENAME>food.h</FILENAME>
+      <LINE>35</LINE>
+      <COLUMN>0</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Food::current_window' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Food::{ctor}</FUNCTION>
+    <DECORATED>??0Food@@QEAA@XZ</DECORATED>
+    <FUNCLINE>35</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Food::current_window</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+</DEFECTS>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DEFECTS>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\thejo\Documents\GitHub\crumble-king\src\</FILEPATH>
+      <FILENAME>emote.h</FILENAME>
+      <LINE>8</LINE>
+      <COLUMN>0</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Emote::time_to_disappear' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Emote::{ctor}</FUNCTION>
+    <DECORATED>??0Emote@@QEAA@XZ</DECORATED>
+    <FUNCLINE>8</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Emote::time_to_disappear</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+</DEFECTS>
