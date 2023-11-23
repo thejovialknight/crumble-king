@@ -30,7 +30,7 @@ PlatformSprite sprite_from_animator(int atlas, Animator& animator, const Vec2& p
 			0,
 			0,
 			false,
-			Vec3(1, 1, 1)
+			Vec3(255, 255, 255)
 		);
 	}
 	return sprite_from_sequence(atlas, *animator.sequence, animator.frame, position, animator.is_flipped);
@@ -51,7 +51,7 @@ PlatformSprite sprite_from_sequence(int atlas, const Sequence& sequence, int fra
 		(int)sequence.origin.x,
 		(int)sequence.origin.y,
 		is_flipped,
-		Vec3(1, 1, 1)
+		Vec3(255, 255, 255)
 	);
 }
 
@@ -92,6 +92,7 @@ Sequences load_sequences(const std::string text)
 		if (sequence_name == "KING_RUN") { sequences.king_run = sequence; }
 		if (sequence_name == "KING_JUMP") { sequences.king_jump = sequence; }
 		if (sequence_name == "KING_FLOAT") { sequences.king_float = sequence; }
+		if (sequence_name == "KING_POST_FLOAT") { sequences.king_post_float = sequence; }
 		if (sequence_name == "GUARD_IDLE") { sequences.guard_idle = sequence; }
 		if (sequence_name == "GUARD_RUN") { sequences.guard_run = sequence; }
 		if (sequence_name == "GUARD_JUMP") { sequences.guard_jump = sequence; }

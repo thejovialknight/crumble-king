@@ -9,7 +9,7 @@ void tick_tower(Tower& tower, int atlas, Sequences& sequences, Sounds& sounds, S
         0,
         128,
         32,
-        Vec3(0.9, 0.2, 0.2)
+        Vec3(219, 65, 97)
     ));
 
     if(tower.level.ready_to_play_dead_sound) {

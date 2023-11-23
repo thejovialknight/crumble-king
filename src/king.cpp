@@ -14,34 +14,51 @@ void tick_king(King& king, Platform& platform, Sequences& sequences, Sounds& sou
     const double fall_gravity_scale = settings.fall_gravity_scale;
     const double gravity = settings.gravity;
     const double post_float_gravity_lerp_speed = 6; // TODO: SETTINGS!
-    const double post_float_gravity_epsilon_threshold = 1; // TODO: SETTINGS!
+    const double post_float_gravity_epsilon_threshold = 0.1; // TODO: SETTINGS!
+    const double float_acceleration_mod = 1;
+    const double float_max_speed_mod = 1;
 
     // Gravity
     king.velocity.y += gravity * king.gravity_scale * delta_time;
 
     // Horizontal movement:
     double same_direction_mod = 1; // TODO: settings
+
+    // Get acceleration and speed mods
     double modded_acceleration = acceleration * king.acceleration_mod;
+    double modded_max_speed = max_speed;
+    if (king.jump_state == JumpState::FLOAT) {
+        modded_acceleration *= float_acceleration_mod;
+        modded_max_speed *= float_max_speed_mod;
+    }
+
 	if (platform.input.left.held) {
         if(king.jump_state == JumpState::GROUND && king.velocity.x <= 0) {
             modded_acceleration *= same_direction_mod;
         }
         king.animator.is_flipped = true;
 		king.velocity.x -= modded_acceleration * delta_time;
-		if(king.velocity.x < -max_speed) {
-			king.velocity.x = -max_speed;
+
+        if (king.jump_state == JumpState::POST_FLOAT && king.velocity.x < -king.cached_post_float_speed) {
+            king.velocity.x = -king.cached_post_float_speed;
+        } else if(king.velocity.x < -modded_max_speed) {
+            king.velocity.x = -modded_max_speed;
 		}
 	}
-
+    
 	if(platform.input.right.held) {
         if(king.jump_state == JumpState::GROUND && king.velocity.x >= 0) {
             modded_acceleration *= same_direction_mod;
         }
         king.animator.is_flipped = false;
 		king.velocity.x += modded_acceleration * delta_time;
-		if(king.velocity.x > max_speed) {
-			king.velocity.x = max_speed;
-		}
+
+        if (king.jump_state == JumpState::POST_FLOAT && king.velocity.x > king.cached_post_float_speed) {
+            king.velocity.x = king.cached_post_float_speed;
+        }
+        else if (king.velocity.x > modded_max_speed) {
+            king.velocity.x = modded_max_speed;
+        }
 	}
 
     king.jump_buffer -= delta_time;
@@ -103,6 +120,7 @@ void tick_king(King& king, Platform& platform, Sequences& sequences, Sounds& sou
                 buffer_sound(platform, sounds.king_float, 1);
                 king.velocity.y = -float_velocity;
                 king.gravity_scale = float_start_gravity_scale;
+                king.cached_post_float_speed = 0;
 
                 if(platform.input.left.held /* && physics.velocity.x > 0*/ ) {
                     king.velocity.x = -max_speed / 2;
@@ -117,11 +135,22 @@ void tick_king(King& king, Platform& platform, Sequences& sequences, Sounds& sou
         king.gravity_scale = lerp(king.gravity_scale, float_target_gravity_scale, float_gravity_lerp_speed * delta_time);  
 
         if(platform.input.jump.just_pressed) {
-            king.jump_buffer = jump_buffer_length;
+            king.jump_state = JumpState::POST_FLOAT;
+            king.cached_post_float_speed = abs(king.velocity.x);
+            if (king.cached_post_float_speed <= max_speed) {
+                king.cached_post_float_speed = max_speed;
+            }
+
         } 
         
         if (platform.input.jump.released) {
+            /*
             king.jump_state = JumpState::POST_FLOAT;
+            king.cached_post_float_speed = abs(king.velocity.x);
+            if (king.cached_post_float_speed <= max_speed) {
+                king.cached_post_float_speed = max_speed;
+            }
+            */
         }
     }
     else if (king.jump_state == JumpState::POST_FLOAT) {
@@ -129,7 +158,7 @@ void tick_king(King& king, Platform& platform, Sequences& sequences, Sounds& sou
     }
 
     // Set king sprite
-    king.animator.frame_length = 0.075;
+    king.animator.frame_length = 0.125;
     king.animator.sequence = &sequences.king_idle;
 
     if (king.velocity.x != 0) { king.animator.sequence = &sequences.king_run; }
@@ -143,7 +172,7 @@ void tick_king(King& king, Platform& platform, Sequences& sequences, Sounds& sou
             if (epsilon_equals(king.gravity_scale, fall_gravity_scale, post_float_gravity_epsilon_threshold)) {
                 king.animator.sequence = &sequences.king_jump;
             } else {
-                king.animator.sequence = &sequences.king_float;
+                king.animator.sequence = &sequences.king_post_float;
             }
         }
     }

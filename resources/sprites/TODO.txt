@@ -1,0 +1,2 @@
+TODO
+- Brick rendering still needs to be fixed in that bricks should probably change as they are crumbled in that tiles adjacent to less healthy tiles should pretend they don't exist. Maybe I didn't do this for stylistic reasons of DISCRETENESS, but IDK

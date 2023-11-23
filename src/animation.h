@@ -30,6 +30,7 @@ struct Sequences {
 	Sequence king_run;
 	Sequence king_jump;
 	Sequence king_float;
+	Sequence king_post_float;
 	Sequence guard_idle;
 	Sequence guard_run;
 	Sequence guard_jump;

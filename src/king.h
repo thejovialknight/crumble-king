@@ -24,6 +24,7 @@ struct King {
     double coyote_time = 0;
     double gravity_scale = 1;
     double acceleration_mod = 1;
+    double cached_post_float_speed = 0;
     bool is_grounded = false;
     bool is_facing_right = true;
     Animator animator;

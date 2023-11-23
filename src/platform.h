@@ -24,10 +24,10 @@ struct PlatformButton {
 };
 
 struct PlatformInput {
-    PlatformButton left = PlatformButton(SDL_SCANCODE_A);
-    PlatformButton right = PlatformButton(SDL_SCANCODE_D);
-    PlatformButton up = PlatformButton(SDL_SCANCODE_W);
-    PlatformButton down = PlatformButton(SDL_SCANCODE_S);
+    PlatformButton left = PlatformButton(SDL_SCANCODE_LEFT);
+    PlatformButton right = PlatformButton(SDL_SCANCODE_RIGHT);
+    PlatformButton up = PlatformButton(SDL_SCANCODE_UP);
+    PlatformButton down = PlatformButton(SDL_SCANCODE_DOWN);
     PlatformButton jump = PlatformButton(SDL_SCANCODE_SPACE);
     PlatformButton pause = PlatformButton(SDL_SCANCODE_ESCAPE);
     PlatformButton debug_select = PlatformButton(SDL_SCANCODE_TAB);

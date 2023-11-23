@@ -1,3 +1,16 @@
-﻿  king.cpp
-C:\Users\thejo\Documents\GitHub\crumble-king\src\king.cpp(186,99): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+﻿  platform.cpp
+C:\Users\thejo\Documents\GitHub\crumble-king\src\platform.cpp(36,34): warning C4244: 'argument': conversion from 'double' to 'Uint8', possible loss of data
+C:\Users\thejo\Documents\GitHub\crumble-king\src\platform.cpp(35,34): warning C4244: 'argument': conversion from 'double' to 'Uint8', possible loss of data
+C:\Users\thejo\Documents\GitHub\crumble-king\src\platform.cpp(34,34): warning C4244: 'argument': conversion from 'double' to 'Uint8', possible loss of data
+C:\Users\thejo\Documents\GitHub\crumble-king\src\platform.cpp(67,54): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\thejo\Documents\GitHub\crumble-king\src\platform.cpp(68,54): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\thejo\Documents\GitHub\crumble-king\src\platform.cpp(69,46): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\thejo\Documents\GitHub\crumble-king\src\platform.cpp(70,46): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\thejo\Documents\GitHub\crumble-king\src\platform.cpp(77,115): warning C4244: 'argument': conversion from 'double' to 'Uint8', possible loss of data
+C:\Users\thejo\Documents\GitHub\crumble-king\src\platform.cpp(77,99): warning C4244: 'argument': conversion from 'double' to 'Uint8', possible loss of data
+C:\Users\thejo\Documents\GitHub\crumble-king\src\platform.cpp(77,83): warning C4244: 'argument': conversion from 'double' to 'Uint8', possible loss of data
+C:\Users\thejo\Documents\GitHub\crumble-king\src\platform.cpp(175,46): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\thejo\Documents\GitHub\crumble-king\src\platform.cpp(180,37): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\thejo\Documents\GitHub\crumble-king\src\platform.cpp(192,44): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\thejo\Documents\GitHub\crumble-king\src\platform.cpp(204,44): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
   crumble-king.vcxproj -> C:\Users\thejo\Documents\GitHub\crumble-king\x64\Debug\crumble-king.exe

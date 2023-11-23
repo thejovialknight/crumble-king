@@ -241,7 +241,7 @@ void draw_level(Level& level, int atlas, Sequences& sequences, Platform& platfor
         0,
         32,
         32,
-        Vec3(0.9, 0.2, 0.2)
+        Vec3(219, 65, 97)
     ));
 
     SDL_RenderPresent(platform.renderer);

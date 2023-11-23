@@ -21,8 +21,8 @@ void tick_menu_list(MenuList& list, Sounds& sounds, Platform& platform)
 
     // Draw menu items
     for(int i = 0; i < list.buttons.size(); ++i) {
-        Vec3 color(0.8, 0.8, 0.8);
-        if(i == list.selection) { color = Vec3(0.9, 0.2, 0.2); };
+        Vec3 color(255, 255, 255);
+        if(i == list.selection) { color = Vec3(219, 65, 97); };
         platform.texts.emplace_back(PlatformText(
             list.buttons[i].text, 
             0,

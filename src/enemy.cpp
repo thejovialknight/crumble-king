@@ -88,9 +88,9 @@ void tick_enemies(std::vector<Enemy>& enemies, King& king, std::vector<Tile>& ti
 
 		enemy.position.x += enemy.velocity.x * delta_time;
 
-		enemy.animator.frame_length = 0.08;
+		enemy.animator.frame_length = 0.125;
 		if(seen_king) {
-			enemy.animator.frame_length = 0.06;
+			enemy.animator.frame_length = 0.095;
 		}
 		enemy.animator.sequence = &sequences.guard_idle;
 		if (enemy.velocity.x != 0) {

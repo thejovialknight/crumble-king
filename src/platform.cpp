@@ -2,8 +2,8 @@
 
 void init_platform(Platform& platform)
 {
-    platform.actual_width = 1920;
-    platform.actual_height = 1080;
+    platform.actual_width = 2560;
+    platform.actual_height = 1440;
     platform.logical_width = 640;
     platform.logical_height = 360;
 
@@ -74,7 +74,7 @@ void update_platform(Platform& platform)
             flip = SDL_FLIP_HORIZONTAL;
         }
 
-        SDL_SetTextureColorMod(platform.texture_assets[sprite.atlas], sprite.color.r * 255, sprite.color.g * 255, sprite.color.b * 255);
+        SDL_SetTextureColorMod(platform.texture_assets[sprite.atlas], sprite.color.r, sprite.color.g, sprite.color.b);
         SDL_RenderCopyEx(platform.renderer, 
             platform.texture_assets[sprite.atlas], 
             &source, 
@@ -211,12 +211,12 @@ void put_sprite(Platform& platform, PlatformSprite sprite)
 
 void buffer_sound(Platform& platform, int handle, double volume)
 {
-    //platform.sounds.push_back(PlatformSound(handle, volume));
+    platform.sounds.push_back(PlatformSound(handle, volume));
 }
 
 void set_music(Platform & platform, int handle, double volume)
 {
-    //Mix_PlayMusic(platform.music_assets[handle], -1);
+    Mix_PlayMusic(platform.music_assets[handle], -1);
 }
 
 void stop_music() {
